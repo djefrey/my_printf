@@ -29,5 +29,5 @@ void print_fullstr(void *value)
 
 void print_ptr(void *value)
 {
-    // ?
+    my_putnbr_base((long) (value), "0123456789abcdef");
 }

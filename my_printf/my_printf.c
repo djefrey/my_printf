@@ -15,7 +15,8 @@ static void check_flag(char *str, va_list *list)
         if (FLAGS[i] == *str) {
             void *value = VA_LIST_FCTS[i](list);
             PRINT_FCTS[i](value);
-            free(value);
+            if (i != FLAG_PTR_ID)
+                free(value);
             return;
         }
     }

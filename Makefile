@@ -13,6 +13,7 @@ SRC			=	my_printf/my_printf.c		\
 				my_putstr.c					\
 				my_strlen.c					\
 				my_put_nbr.c				\
+				my_putnbr_base.c			\
 				my_strcpy.c					\
 				my_strdup.c					\
 				my_str_isprintable.c
@@ -40,10 +41,12 @@ tests_run:	$(NAME)	$(TESTS_OBJ)
 
 clean:
 	rm -rf $(OBJ)
+	rm -f $(MAIN_OBJ)
 	rm -rf $(TESTS_OBJ)
 
 fclean:	clean
 	rm -f $(NAME)
+	rm -f $(NAME_MAIN)
 	rm -f $(NAME_TEST)
 
 re: fclean all
