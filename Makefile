@@ -8,7 +8,9 @@
 MAIN		=	main.c
 SRC			=	my_printf/my_printf.c		\
 				my_printf/va_list_fct.c		\
+				my_printf/va_list_nbrs_fct.c\
 				my_printf/print_fcts.c		\
+				my_printf/print_nbrs_fcts.c	\
 				my_putchar.c				\
 				my_putstr.c					\
 				my_strlen.c					\
@@ -16,10 +18,12 @@ SRC			=	my_printf/my_printf.c		\
 				my_putnbr_base.c			\
 				my_strcpy.c					\
 				my_strdup.c					\
-				my_str_isprintable.c
+				my_strcmp.c					\
+				my_str_isprintable.c		\
+				my_str_isalpha.c
 TESTS		=	tests.c
 INC_DIR		=	./include/
-CFLAGS		+=	-W -Wall -I$(INC_DIR)
+CFLAGS		+=	-W -Wall -I$(INC_DIR) -g
 MAIN_OBJ	=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)
 TESTS_OBJ	=	$(TESTS:.c=.o)

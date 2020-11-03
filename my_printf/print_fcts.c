@@ -7,11 +7,6 @@
 
 #include "my.h"
 
-void print_int(void *value)
-{
-    my_put_nbr(*((int*) (value)));
-}
-
 void print_char(void *value)
 {
     my_putchar(*((char*) (value)));

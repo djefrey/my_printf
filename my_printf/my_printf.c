@@ -9,17 +9,19 @@
 #include "my.h"
 #include <stdlib.h>
 
-static void check_flag(char *str, va_list *list)
+static int check_flag(char **str, va_list *list)
 {
     for (int i = 0; i < NUMBER_FLAGS; i++) {
-        if (FLAGS[i] == *str) {
+        if (!my_strcmp(FLAGS[i], *str)) {
             void *value = VA_LIST_FCTS[i](list);
             PRINT_FCTS[i](value);
             if (i != FLAG_PTR_ID)
                 free(value);
-            return;
+            *str += my_strlen(FLAGS[i]);
+            return (1);
         }
     }
+    return (0);
 }
 
 int my_printf(char *str, ...)
@@ -30,10 +32,14 @@ int my_printf(char *str, ...)
     while (*str) {
         if (*str == '%') {
             str += 1;
-            check_flag(str, &arg_list);
-        } else
+            if (!check_flag(&str, &arg_list)) {
+                my_putchar('%');
+                my_putchar(*str);
+            }
+        } else {
             my_putchar(*str);
-        str += 1;
+            str += 1;
+        }
     }
     va_end(arg_list);
     return (0);

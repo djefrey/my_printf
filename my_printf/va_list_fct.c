@@ -9,15 +9,6 @@
 #include <stdlib.h>
 #include "my.h"
 
-void *va_list_int(va_list *arg)
-{
-    int value = va_arg(*arg, int);
-    int *ptr = malloc(sizeof(int));
-
-    *ptr = value;
-    return ((void*) (ptr));
-}
-
 void *va_list_char(va_list *arg)
 {
     char value = va_arg(*arg, int);

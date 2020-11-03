@@ -15,12 +15,12 @@ int my_put_fullstr(char const *str);
 int my_strlen(char const *str);
 char *my_strdup(char const *src);
 char *my_strcpy(char *dest, char const *src);
+int my_strcmp(char const *s1, char const *s2);
 
-char is_neg(long nb);
-unsigned int get_number_length(long nb);
 int my_put_nbr(long nb);
 int my_putnbr_base(long nb, char const *base);
 
 char is_printable(char c);
+char is_letter(char c);
 
 #endif /* !MY_H_ */
