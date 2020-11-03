@@ -20,7 +20,7 @@ void *va_list_int(va_list *arg)
 
 void *va_list_char(va_list *arg)
 {
-    char value = va_arg(*arg, char);
+    char value = va_arg(*arg, int);
     char *ptr = malloc(sizeof(char));
 
     *ptr = value;
