@@ -35,6 +35,7 @@ int my_printf(char *str, ...)
             if (!check_flag(&str, &arg_list)) {
                 my_putchar('%');
                 my_putchar(*str);
+                str += 1;
             }
         } else {
             my_putchar(*str);
