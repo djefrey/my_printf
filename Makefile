@@ -40,7 +40,7 @@ main:	$(NAME)	$(MAIN_OBJ)
 	gcc -o $(NAME_MAIN) $(MAIN_OBJ) -I$(INC_DIR) -L. -lmy
 
 tests_run:	CFLAGS += --coverage
-tests_run: clean $(NAME)	$(TESTS_OBJ)
+tests_run:	clean	$(NAME)	$(TESTS_OBJ)
 	gcc -o $(NAME_TEST) $(TESTS_OBJ) -I$(INC_DIR) -L. -lmy -lcriterion -lgcov
 	./$(NAME_TEST)
 
