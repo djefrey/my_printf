@@ -15,6 +15,7 @@ int my_put_fullstr(char const *str);
 int my_strlen(char const *str);
 int my_put_nbr(int nb);
 char *my_strdup(char const *src);
+char *my_strcpy(char *dest, char const *src);
 
 char is_printable(char c);
 
