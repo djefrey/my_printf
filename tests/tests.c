@@ -27,6 +27,12 @@ Test(my_printf, simple_str_newline, .init = redirect_all_std)
     cr_assert_stdout_eq_str("Hello\nWorld");
 }
 
+Test(my_printf, no_flag, .init = redirect_all_std)
+{
+    my_printf("30% en moins");
+    cr_assert_stdout_eq_str("30% en moins");
+}
+
 Test(my_printf, print_shorts, .init = redirect_all_std)
 {
     my_printf("%hd/%hd", (short) (32767), (short) (32768));
@@ -111,6 +117,6 @@ Test(my_printf, print_binary, .init = redirect_all_std)
 
 Test(my_printf, print_hexa, .init = redirect_all_std)
 {
-    my_printf("%x %x", 140725262749228, 83729387928372836);
-    cr_assert_stdout_eq_str("7ffd274c0e2c 129776f48bb4664");
+    my_printf("%x %x", 140725262749228, -83729387928372836);
+    cr_assert_stdout_eq_str("7ffd274c0e2c -129776f48bb4664");
 }
