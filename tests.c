@@ -27,6 +27,12 @@ Test(my_printf, simple_str_newline, .init = redirect_all_std)
     cr_assert_stdout_eq_str("Hello\nWorld");
 }
 
+Test(my_printf, print_shorts, .init = redirect_all_std)
+{
+    my_printf("%hd/%hd", (short) (32767), (short) (32768));
+    cr_assert_stdout_eq_str("32767/-32768");
+}
+
 Test(my_printf, print_int, .init = redirect_all_std)
 {
     my_printf("I'm %i", 18);
@@ -37,6 +43,12 @@ Test(my_printf, print_ints, .init = redirect_all_std)
 {
     my_printf("I'm %i and my sister is %i", 18, 17);
     cr_assert_stdout_eq_str("I'm 18 and my sister is 17");
+}
+
+Test(my_printf, print_longs, .init = redirect_all_std)
+{
+    my_printf("%ld/%ld", (long) (9223372036854775807), (long) (9223372036854775808));
+    cr_assert_stdout_eq_str("9223372036854775807/-9223372036854775808");
 }
 
 Test(my_printf, print_char, .init = redirect_all_std)
@@ -89,4 +101,16 @@ Test(my_printf, print_fullstr_len2, .init = redirect_all_std)
     str[0] = 15;
     my_printf("%S", str);
     cr_assert_stdout_eq_str("\\015");
+}
+
+Test(my_printf, print_binary, .init = redirect_all_std)
+{
+    my_printf("%b %b", 903092393692837, 82387632377);
+    cr_assert_stdout_eq_str("11001101010101101110010101010100110100111010100101 1001100101110101011111000000011111001");
+}
+
+Test(my_printf, print_hexa, .init = redirect_all_std)
+{
+    my_printf("%x %x", 140725262749228, 83729387928372836);
+    cr_assert_stdout_eq_str("7ffd274c0e2c 129776f48bb4664");
 }
