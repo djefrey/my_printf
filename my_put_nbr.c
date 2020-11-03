@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-static unsigned char is_neg(long nb)
+char is_neg(long nb)
 {
     if (nb < 0) {
         my_putchar('-');
@@ -16,7 +16,7 @@ static unsigned char is_neg(long nb)
     return 0;
 }
 
-static unsigned int get_number_length(long nb)
+unsigned int get_number_length(long nb)
 {
     int length = 1;
 
@@ -26,19 +26,18 @@ static unsigned int get_number_length(long nb)
     return length;
 }
 
-int my_put_nbr(int nb)
+int my_put_nbr(long nb)
 {
-    long l_nb = nb;
     int digit;
     unsigned int length;
 
-    if (is_neg(l_nb))
-        l_nb *= -1;
-    length = get_number_length(l_nb);
+    if (is_neg(nb))
+        nb *= -1;
+    length = get_number_length(nb);
     while (length > 0) {
-        digit = l_nb / length;
+        digit = nb / length;
         my_putchar(48 + digit);
-        l_nb = l_nb - l_nb / length * length;
+        nb = nb - nb / length * length;
         length /= 10;
     }
     return (0);
