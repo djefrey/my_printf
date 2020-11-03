@@ -20,7 +20,4 @@ int my_strcmp(char const *s1, char const *s2);
 int my_put_nbr(long nb);
 int my_putnbr_base(long nb, char const *base);
 
-char is_printable(char c);
-char is_letter(char c);
-
 #endif /* !MY_H_ */

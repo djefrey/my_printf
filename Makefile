@@ -18,9 +18,7 @@ SRC			=	my_printf/my_printf.c		\
 				my_putnbr_base.c			\
 				my_strcpy.c					\
 				my_strdup.c					\
-				my_strcmp.c					\
-				my_str_isprintable.c		\
-				my_str_isalpha.c
+				my_strcmp.c
 TESTS		=	./tests/tests.c
 INC_DIR		=	./include/
 CFLAGS 		+= -W -Wall -I$(INC_DIR)

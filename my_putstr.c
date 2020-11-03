@@ -22,7 +22,7 @@ int my_put_fullstr(char const *str)
 
     for (int i = 0; str[i]; i++) {
         c = str[i];
-        if (is_printable(c))
+        if (c >= 32 && c <= 126)
             my_putchar(c);
         else {
             my_putchar('\\');
