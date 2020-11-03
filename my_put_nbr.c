@@ -7,29 +7,29 @@
 
 #include "my.h"
 
-char is_neg(long nb)
+static char is_neg(long nb)
 {
     if (nb < 0) {
         my_putchar('-');
-        return 1;
+        return (1);
     }
-    return 0;
+    return (0);
 }
 
-unsigned int get_number_length(long nb)
+static unsigned long get_number_length(long nb)
 {
-    int length = 1;
+    unsigned long length = 1;
 
     while (nb / length > 9) {
         length *= 10;
     }
-    return length;
+    return (length);
 }
 
 int my_put_nbr(long nb)
 {
     int digit;
-    unsigned int length;
+    unsigned long length;
 
     if (is_neg(nb))
         nb *= -1;

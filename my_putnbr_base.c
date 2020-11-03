@@ -6,27 +6,39 @@
 */
 
 #include "my.h"
+#include <stdlib.h>
+
+static unsigned long get_nbr_len(long nb, int base_size)
+{
+    long quotient = nb;
+    unsigned long length = 0;
+
+    while (quotient > 0) {
+        quotient = nb / base_size;
+        nb = quotient;
+        length++;
+    }
+    return (length);
+}
 
 int my_putnbr_base(long nb, char const *base)
 {
     int base_size = my_strlen(base);
-    long quotient = nb;
     int remainder = 0;
-    char str[32] = {0};
-    int length = 0;
+    unsigned long length = get_nbr_len(nb, base_size);
+    char *str = malloc(sizeof(char) * length);
 
-    if (is_neg(nb)) {
+    if (nb < 0) {
+        my_putchar('-');
         nb *= -1;
-        quotient *= -1;
     }
-    while (quotient > 0) {
-        quotient = nb / base_size;
-        remainder = nb - quotient * base_size;
-        str[length] = base[remainder];
-        nb = quotient;
-        length++;
+    for (int i = 0; nb > 0; i++) {
+        remainder = nb % base_size;
+        str[i] = base[remainder];
+        nb = nb / base_size;
     }
     for (int i = length; i >= 0; i--)
         my_putchar(str[i]);
+    free(str);
     return (0);
 }
