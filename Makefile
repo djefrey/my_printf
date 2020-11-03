@@ -21,7 +21,7 @@ SRC			=	my_printf/my_printf.c		\
 				my_strcmp.c					\
 				my_str_isprintable.c		\
 				my_str_isalpha.c
-TESTS		=	tests.c
+TESTS		=	./tests/tests.c
 INC_DIR		=	./include/
 CFLAGS		+=	-W -Wall -I$(INC_DIR) -g
 MAIN_OBJ	=	$(MAIN:.c=.o)
