@@ -37,7 +37,7 @@ int my_putnbr_base(long nb, char const *base)
         str[i] = base[remainder];
         nb = nb / base_size;
     }
-    for (int i = length; i >= 0; i--)
+    for (int i = length - 1; i >= 0; i--)
         my_putchar(str[i]);
     free(str);
     return (0);
