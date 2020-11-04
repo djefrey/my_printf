@@ -26,7 +26,7 @@ MAIN_OBJ	=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)
 TESTS_OBJ	=	$(TESTS:.c=.o)
 NAME		=	libmy.a
-NAME_MAIN	=	test_main
+NAME_MAIN	=	tests_main
 NAME_TEST	=	tests_run
 
 all:	$(NAME)
