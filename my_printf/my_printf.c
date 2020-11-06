@@ -13,8 +13,11 @@ static int check_flag(char **str, va_list *list)
 {
     va_list_fct_t length_modif = &va_list_nbint;
 
-    if (**str == '%')
-        return (0);
+    if (**str == '%') {
+        my_putchar('%');
+        *str += 1;
+        return (1);
+    }
     for (int i = 0; i < NUMBER_MODIFIERS; i++) {
         if (!my_strcmp(*str, MODIFIERS[i])) {
             length_modif = VA_LIST_MOD[i];
@@ -46,6 +49,7 @@ int my_printf(char *str, ...)
             str += 1;
             if (!check_flag(&str, &arg_list)) {
                 my_putchar('%');
+                my_putchar(*str);
                 str += 1;
             }
         } else {
