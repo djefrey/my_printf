@@ -9,29 +9,47 @@
 #include <stdlib.h>
 #include "my.h"
 
-void *va_list_short(va_list *arg)
+void *va_list_nbchar(va_list *arg)
 {
-    short value = va_arg(*arg, int);
-    short *ptr = malloc(sizeof(short));
+    char value = (char) (va_arg(*arg, int));
+    long long *ptr = malloc(sizeof(long long));
 
     *ptr = value;
-    return ((void*) (ptr));
+    return (ptr);
 }
 
-void *va_list_int(va_list *arg)
+void *va_list_nbshort(va_list *arg)
+{
+    short value = (short) (va_arg(*arg, int));
+    long long *ptr = malloc(sizeof(long long));
+
+    *ptr = value;
+    return (ptr);
+}
+
+void *va_list_nbint(va_list *arg)
 {
     int value = va_arg(*arg, int);
-    int *ptr = malloc(sizeof(int));
+    long long *ptr = malloc(sizeof(long long));
 
     *ptr = value;
-    return ((void*) (ptr));
+    return (ptr);
 }
 
-void *va_list_long(va_list *arg)
+void *va_list_nblong(va_list *arg)
 {
     long value = va_arg(*arg, long);
-    long *ptr = malloc(sizeof(long));
+    long long *ptr = malloc(sizeof(long long));
 
     *ptr = value;
-    return ((void*) (ptr));
+    return (ptr);
+}
+
+void *va_list_nblonglong(va_list *arg)
+{
+    long long value = va_arg(*arg, long long);
+    long long *ptr = malloc(sizeof(long long));
+
+    *ptr = value;
+    return (ptr);
 }

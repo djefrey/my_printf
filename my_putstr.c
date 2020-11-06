@@ -22,15 +22,11 @@ int my_put_fullstr(char const *str)
 
     for (int i = 0; str[i]; i++) {
         c = str[i];
-        if (c >= 32 && c <= 126)
+        if (c >= 32)
             my_putchar(c);
         else {
             my_putchar('\\');
-            if (c < 10)
-                write(1, "00", 2);
-            else if (c < 100)
-                my_putchar('0');
-            my_put_nbr((int) c);
+            my_putnbr_base_w_zero(c, "01234567", 3);
         }
     }
     return (0);

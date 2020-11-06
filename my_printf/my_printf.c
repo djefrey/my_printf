@@ -11,13 +11,24 @@
 
 static int check_flag(char **str, va_list *list)
 {
-    for (int i = 0; i < NUMBER_FLAGS; i++) {
-        if (!my_strcmp(FLAGS[i], *str)) {
-            void *value = VA_LIST_FCTS[i](list);
+    va_list_fct_t length_modif = &va_list_nbint;
+
+    if (**str == '%')
+        return (0);
+    for (int i = 0; i < NUMBER_MODIFIERS; i++) {
+        if (!my_strcmp(*str, MODIFIERS[i])) {
+            length_modif = VA_LIST_MOD[i];
+            *str += my_strlen(MODIFIERS[i]);
+        }
+    }
+    for (int i = 0; i < NUMBER_SPECIFIERS; i++) {
+        if (**str == SPECIFIERS[i]) {
+            void *value = VA_LIST_SPEC[i] != NULL ?
+            VA_LIST_SPEC[i](list) : (*length_modif) (list);
             PRINT_FCTS[i](value);
             if (i != FLAG_PTR_ID)
                 free(value);
-            *str += my_strlen(FLAGS[i]);
+            *str += 1;
             return (1);
         }
     }
@@ -34,7 +45,6 @@ int my_printf(char *str, ...)
             str += 1;
             if (!check_flag(&str, &arg_list)) {
                 my_putchar('%');
-                my_putchar(*str);
                 str += 1;
             }
         } else {

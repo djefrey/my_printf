@@ -6,22 +6,22 @@
 ##
 
 MAIN		=	main.c
-SRC			=	my_printf/my_printf.c		\
-				my_printf/va_list_fct.c		\
-				my_printf/va_list_nbrs_fct.c\
-				my_printf/print_fcts.c		\
-				my_printf/print_nbrs_fcts.c	\
-				my_putchar.c				\
-				my_putstr.c					\
-				my_strlen.c					\
-				my_put_nbr.c				\
-				my_putnbr_base.c			\
-				my_strcpy.c					\
-				my_strdup.c					\
+SRC			=	my_printf/my_printf.c			\
+				my_printf/va_list_fct.c			\
+				my_printf/va_list_nbrs_fct.c	\
+				my_printf/print_fcts.c			\
+				my_printf/print_base_fcts.c		\
+				my_putchar.c					\
+				my_putstr.c						\
+				my_strlen.c						\
+				my_put_nbr.c					\
+				my_putnbr_base.c				\
+				my_strcpy.c						\
+				my_strdup.c						\
 				my_strcmp.c
 TESTS		=	./tests/tests.c
 INC_DIR		=	./include/
-CFLAGS 		+= -W -Wall -I$(INC_DIR)
+CFLAGS 		+= -W -Wall -I$(INC_DIR) -g
 MAIN_OBJ	=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)
 TESTS_OBJ	=	$(TESTS:.c=.o)

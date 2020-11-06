@@ -27,12 +27,6 @@ Test(my_printf, simple_str_newline, .init = redirect_all_std)
     cr_assert_stdout_eq_str("Hello\nWorld");
 }
 
-Test(my_printf, no_flag, .init = redirect_all_std)
-{
-    my_printf("30% en moins");
-    cr_assert_stdout_eq_str("30% en moins");
-}
-
 Test(my_printf, print_shorts, .init = redirect_all_std)
 {
     my_printf("%hd/%hd", (short) (32767), (short) (32768));
@@ -53,7 +47,7 @@ Test(my_printf, print_ints, .init = redirect_all_std)
 
 Test(my_printf, print_longs, .init = redirect_all_std)
 {
-    my_printf("%ld/%ld", (long) (9223372036854775807), (long) (9223372036854775808));
+    my_printf("%ld/%ld", 9223372036854775807, 9223372036854775808);
     cr_assert_stdout_eq_str("9223372036854775807/-9223372036854775808");
 }
 
@@ -106,7 +100,7 @@ Test(my_printf, print_fullstr_len2, .init = redirect_all_std)
 
     str[0] = 15;
     my_printf("%S", str);
-    cr_assert_stdout_eq_str("\\015");
+    cr_assert_stdout_eq_str("\\017");
 }
 
 Test(my_printf, print_ptr, .init = redirect_all_std)
@@ -119,12 +113,18 @@ Test(my_printf, print_ptr, .init = redirect_all_std)
 
 Test(my_printf, print_binary, .init = redirect_all_std)
 {
-    my_printf("%b %b", 903092393692837, 82387632377);
+    my_printf("%lb %lb", 903092393692837, 82387632377);
     cr_assert_stdout_eq_str("11001101010101101110010101010100110100111010100101 1001100101110101011111000000011111001");
 }
 
 Test(my_printf, print_hexa, .init = redirect_all_std)
 {
-    my_printf("%x %x", 140725262749228, -83729387928372836);
-    cr_assert_stdout_eq_str("7ffd274c0e2c -129776f48bb4664");
+    my_printf("%lx %lX", 140725262749228, 83729387928372836);
+    cr_assert_stdout_eq_str("7ffd274c0e2c 129776F48BB4664");
+}
+
+Test(my_printf, print_percent_flag, .init = redirect_all_std)
+{
+    my_printf("%%");
+    cr_assert_stdout_eq_str("%");
 }
