@@ -149,3 +149,9 @@ Test(my_printf, print_no_flag, .init = redirect_all_std)
     my_printf("astek%42moulinette");
     cr_assert_stdout_eq_str("astek%42moulinette");
 }
+
+Test(my_printf, print_unknown_flag, .init = redirect_all_std)
+{
+    my_printf("%j ");
+    cr_assert_stdout_eq_str("%j ");
+}
