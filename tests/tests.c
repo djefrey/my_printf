@@ -94,21 +94,18 @@ Test(my_printf, print_fullstrduo, .init = redirect_all_std)
     cr_assert_stdout_eq_str("Le nombre est \\004\\002");
 }
 
-Test(my_printf, print_fullstr_len2, .init = redirect_all_std)
-{
-    char str[] = " ";
-
-    str[0] = 15;
-    my_printf("%S", str);
-    cr_assert_stdout_eq_str("\\017");
-}
-
 Test(my_printf, print_ptr, .init = redirect_all_std)
 {
     int *a = 0x112233acdef;
 
     my_printf("%p", a);
     cr_assert_stdout_eq_str("0x112233acdef");
+}
+
+Test(my_printf, print_octal, .init = redirect_all_std)
+{
+    my_printf("%o", 15);
+    cr_assert_stdout_eq_str("\\017");
 }
 
 Test(my_printf, print_binary, .init = redirect_all_std)

@@ -85,7 +85,7 @@ int my_putnbr_base_w_zero(unsigned long long nb, char const *base, int n_zero)
     }
     for (int i = 0; i < (int) ((n_zero + 1) - length); i++)
         my_putchar(base[0]);
-    for (int i = length - 1; i >= 0; i--)
+    for (int i = length - 2; i >= 0; i--)
         my_putchar(str[i]);
     free(str);
     return (0);
