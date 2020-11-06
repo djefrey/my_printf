@@ -11,7 +11,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-#define NUMBER_MODIFIERS 4
+#define NUMBER_MODIFIERS 7
 #define NUMBER_SPECIFIERS 11
 #define FLAG_PTR_ID 0
 
@@ -40,10 +40,13 @@ void print_str(void *value);
 void print_fullstr(void *value);
 void print_ptr(void *value);
 
-const char *MODIFIERS[] = {"hh", "h", "ll", "l"};
+const char *MODIFIERS[] = {"hh", "h", "ll", "l",
+                            "j", "z", "t"};
 
 const va_list_fct_t VA_LIST_MOD[] = {&va_list_nbchar, &va_list_nbshort,
-                            &va_list_nblonglong, &va_list_nblong};
+                            &va_list_nblonglong, &va_list_nblong,
+                            &va_list_nblonglong, &va_list_nbint,
+                            &va_list_nbint};
 
 const char SPECIFIERS[] = {'p',
                         'o', 'u',
