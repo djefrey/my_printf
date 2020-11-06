@@ -120,6 +120,24 @@ Test(my_printf, print_hexa, .init = redirect_all_std)
     cr_assert_stdout_eq_str("7ffd274c0e2c 129776F48BB4664");
 }
 
+Test(my_printf, print_unsigned_char, .init = redirect_all_std)
+{
+    my_printf("%hhu %hhu", 255, 256);
+    cr_assert_stdout_eq_str("255 0");
+}
+
+Test(my_printf, print_unsigned_short, .init = redirect_all_std)
+{
+    my_printf("%hu %hu", 65535, 65536);
+    cr_assert_stdout_eq_str("65535 0");
+}
+
+Test(my_printf, print_unsigned_longlong, .init = redirect_all_std)
+{
+    my_printf("%llu %llu", 18446744073709551615, 18446744073709551616);
+    cr_assert_stdout_eq_str("18446744073709551615 0");
+}
+
 Test(my_printf, print_percent_flag, .init = redirect_all_std)
 {
     my_printf("%%");

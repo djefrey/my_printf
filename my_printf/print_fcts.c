@@ -6,10 +6,13 @@
 */
 
 #include "my.h"
+#include "nbr.h"
 
 void print_nb(void *value)
 {
-    my_put_nbr(*((long long*) (value)));
+    nbr_t *nbr = (nbr_t*) value;
+
+    my_put_nbr(nbr->sign);
 }
 
 void print_char(void *value)

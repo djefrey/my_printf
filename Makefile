@@ -10,7 +10,7 @@ SRC			=	my_printf/my_printf.c			\
 				my_printf/va_list_fct.c			\
 				my_printf/va_list_nbrs_fct.c	\
 				my_printf/print_fcts.c			\
-				my_printf/print_base_fcts.c		\
+				my_printf/print_nbrs_fcts.c		\
 				my_putchar.c					\
 				my_putstr.c						\
 				my_strlen.c						\
@@ -21,7 +21,7 @@ SRC			=	my_printf/my_printf.c			\
 				my_strcmp.c
 TESTS		=	./tests/tests.c
 INC_DIR		=	./include/
-CFLAGS 		+= -W -Wall -I$(INC_DIR) -g
+CFLAGS 		+= -W -Wall -I$(INC_DIR)
 MAIN_OBJ	=	$(MAIN:.c=.o)
 OBJ			=	$(SRC:.c=.o)
 TESTS_OBJ	=	$(TESTS:.c=.o)

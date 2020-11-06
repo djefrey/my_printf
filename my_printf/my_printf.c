@@ -5,9 +5,9 @@
 ** my_printf
 */
 
+#include <stdlib.h>
 #include "my_printf.h"
 #include "my.h"
-#include <stdlib.h>
 
 static int check_flag(char **str, va_list *list)
 {
@@ -19,12 +19,13 @@ static int check_flag(char **str, va_list *list)
         if (!my_strcmp(*str, MODIFIERS[i])) {
             length_modif = VA_LIST_MOD[i];
             *str += my_strlen(MODIFIERS[i]);
+            break;
         }
     }
     for (int i = 0; i < NUMBER_SPECIFIERS; i++) {
         if (**str == SPECIFIERS[i]) {
             void *value = VA_LIST_SPEC[i] != NULL ?
-            VA_LIST_SPEC[i](list) : (*length_modif) (list);
+            VA_LIST_SPEC[i](list) : (*length_modif)(list);
             PRINT_FCTS[i](value);
             if (i != FLAG_PTR_ID)
                 free(value);

@@ -11,8 +11,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-#define NUMBER_MODIFIERS 4 // A CHNAGER !!!
-#define NUMBER_SPECIFIERS 10 // A CHNAGER !!!
+#define NUMBER_MODIFIERS 4
+#define NUMBER_SPECIFIERS 11
 #define FLAG_PTR_ID 0
 
 typedef void *(*va_list_fct_t) (va_list *arg);
@@ -29,6 +29,7 @@ void *va_list_str(va_list *arg);
 void *va_list_ptr(va_list *arg);
 
 void print_nb(void *value);
+void print_unnb(void *value);
 void print_octal(void *value);
 void print_binary(void *value);
 void print_hexa(void *value);
@@ -45,21 +46,21 @@ const va_list_fct_t VA_LIST_MOD[] = {&va_list_nbchar, &va_list_nbshort,
                             &va_list_nblonglong, &va_list_nblong};
 
 const char SPECIFIERS[] = {'p',
-                        'o', // UNSINGED INT
+                        'o', 'u',
                         'd', 'i',
                         'c',
                         's', 'S',
                         'b', 'x', 'X'};
 
 const va_list_fct_t VA_LIST_SPEC[] = {&va_list_ptr,
-                                NULL, /* NULL */
+                                NULL, NULL,
                                 NULL, NULL,
                                 &va_list_char,
                                 &va_list_str, &va_list_str,
                                 NULL, NULL, NULL};
 
 const print_fct_t PRINT_FCTS[] = {&print_ptr,
-                                &print_octal, /* PRINT UN. DEC. */
+                                &print_octal, &print_unnb,
                                 &print_nb, &print_nb,
                                 &print_char,
                                 &print_str, &print_fullstr,

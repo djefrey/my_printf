@@ -8,48 +8,54 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "my.h"
+#include "nbr.h"
 
 void *va_list_nbchar(va_list *arg)
 {
     char value = (char) (va_arg(*arg, int));
-    long long *ptr = malloc(sizeof(long long));
+    nbr_t *nbr_ptr = malloc(sizeof(nbr_t));
 
-    *ptr = value;
-    return (ptr);
+    nbr_ptr->unsign = (unsigned char) value;
+    nbr_ptr->sign = (char) value;
+    return (nbr_ptr);
 }
 
 void *va_list_nbshort(va_list *arg)
 {
     short value = (short) (va_arg(*arg, int));
-    long long *ptr = malloc(sizeof(long long));
+    nbr_t *nbr_ptr = malloc(sizeof(nbr_t));
 
-    *ptr = value;
-    return (ptr);
+    nbr_ptr->unsign = (unsigned short) value;
+    nbr_ptr->sign = (short) value;
+    return (nbr_ptr);
 }
 
 void *va_list_nbint(va_list *arg)
 {
-    int value = va_arg(*arg, int);
-    long long *ptr = malloc(sizeof(long long));
+    int value = (int) (va_arg(*arg, int));
+    nbr_t *nbr_ptr = malloc(sizeof(nbr_t));
 
-    *ptr = value;
-    return (ptr);
+    nbr_ptr->unsign = (unsigned int) value;
+    nbr_ptr->sign = (int) value;
+    return (nbr_ptr);
 }
 
 void *va_list_nblong(va_list *arg)
 {
-    long value = va_arg(*arg, long);
-    long long *ptr = malloc(sizeof(long long));
+    long value = (long) (va_arg(*arg, long));
+    nbr_t *nbr_ptr = malloc(sizeof(nbr_t));
 
-    *ptr = value;
-    return (ptr);
+    nbr_ptr->unsign = (unsigned long) value;
+    nbr_ptr->sign = (long) value;
+    return (nbr_ptr);
 }
 
 void *va_list_nblonglong(va_list *arg)
 {
-    long long value = va_arg(*arg, long long);
-    long long *ptr = malloc(sizeof(long long));
+    long long value = (long long) (va_arg(*arg, long long));
+    nbr_t *nbr_ptr = malloc(sizeof(nbr_t));
 
-    *ptr = value;
-    return (ptr);
+    nbr_ptr->unsign = (unsigned long long) value;
+    nbr_ptr->sign = (long long) value;
+    return (nbr_ptr);
 }
