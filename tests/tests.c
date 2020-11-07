@@ -152,6 +152,6 @@ Test(my_printf, print_no_flag, .init = redirect_all_std)
 
 Test(my_printf, print_unknown_flag, .init = redirect_all_std)
 {
-    my_printf("%j ");
-    cr_assert_stdout_eq_str("%j ");
+    my_printf("%m ");
+    cr_assert_stdout_eq_str("%m ");
 }
