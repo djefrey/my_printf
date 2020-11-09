@@ -19,5 +19,6 @@ int my_strlen(char const *str);
 char *my_strdup(char const *src);
 char *my_strcpy(char *dest, char const *src);
 int my_strcmp(char const *s1, char const *s2);
+char *my_intstr(int nb);
 
 #endif /* !MY_H_ */

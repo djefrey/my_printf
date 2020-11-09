@@ -35,34 +35,46 @@ void print_nb(void *value, int flags, int fwidth)
 
 void print_char(void *value, int flags, int fwidth)
 {
+    if (!(flags & FLAG_MINUS) && fwidth - 1 > 0) {
+        for (int i = 0; i < fwidth - 1; i++)
+            my_putchar(' ');
+    }
     my_putchar(*((char*) (value)));
+    if ((flags & FLAG_MINUS) && fwidth - 1 > 0) {
+        for (int i = 0; i < fwidth - 1; i++)
+            my_putchar(' ');
+    }
 }
 
 void print_str(void *value, int flags, int fwidth)
 {
-    my_putstr((char*) (value));
+    char *str = (char*) (value);
+    int len = my_strlen(str);
+
+    if (!(flags & FLAG_MINUS) && fwidth - len > 0) {
+        for (int i = 0; i < fwidth - len; i++)
+            my_putchar(' ');
+    }
+    my_putstr(str);
+    if ((flags & FLAG_MINUS) && fwidth - len > 0) {
+        for (int i = 0; i < fwidth - len; i++)
+            my_putchar(' ');
+    }
 }
 
 void print_fullstr(void *value, int flags, int fwidth)
 {
-    char *str = (char*) value;
-    char c;
-    char *nbr_str;
-    int len;
+    char *str = printf_get_fullstr((char*) value);
+    int len = my_strlen(str);
 
-    for (int i = 0; str[i]; i++) {
-        c = str[i];
-        if (c >= 32)
-            my_putchar(c);
-        else {
-            my_putchar('\\');
-            nbr_str = printf_get_unbr_base(c, "01234567", 0);
-            len = my_strlen(nbr_str);
-            for (int i = 3; i - len > 0; i--)
-                my_putchar('0');
-            my_putstr(nbr_str);
-            free(nbr_str);
-        }
+    if (!(flags & FLAG_MINUS) && fwidth - len > 0) {
+        for (int i = 0; i < fwidth - len; i++)
+            my_putchar(' ');
+    }
+    my_putstr(str);
+    if ((flags & FLAG_MINUS) && fwidth - len > 0) {
+        for (int i = 0; i < fwidth - len; i++)
+            my_putchar(' ');
     }
 }
 

@@ -13,13 +13,15 @@ SRC			=	my_printf/my_printf.c			\
 				my_printf/print_nbrs_fcts.c		\
 				my_printf/printf_get_nbr.c		\
 				my_printf/printf_get_nbr_base.c	\
+				my_printf/print_get_fullstr.c	\
 				my_putchar.c					\
 				my_putstr.c						\
 				my_strlen.c						\
 				my_strcpy.c						\
 				my_strdup.c						\
 				my_strcmp.c						\
-				my_revstr.c
+				my_revstr.c						\
+				my_intstr.c
 TESTS		=	./tests/tests.c
 INC_DIR		=	./include/
 CFLAGS 		+= -W -Wall -I$(INC_DIR)
