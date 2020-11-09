@@ -28,7 +28,7 @@ void print_nb(void *value, int flags, int fwidth)
     my_putstr(str + offset);
     if ((flags & FLAG_MINUS) && fwidth - len > 0) {
         for (int i = 0; i < fwidth - len; i++)
-            my_putchar(flags & FLAG_ZERO ? '0' : ' ');
+            my_putchar(' ');
     }
     free(str);
 }

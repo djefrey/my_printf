@@ -162,30 +162,6 @@ Test(my_printf, print_unknown_flag, .init = redirect_all_std)
     cr_assert_stdout_eq_str("%m ");
 }
 
-Test(my_printf, print_field_width, .init = redirect_all_std)
-{
-    my_printf("%5d", 42);
-    cr_assert_stdout_eq_str("   42");
-}
-
-Test(my_printf, print_flag_minus, .init = redirect_all_std)
-{
-    my_printf("%-5d", 42);
-    cr_assert_stdout_eq_str("42   ");
-}
-
-Test(my_printf, print_flag_zero, .init = redirect_all_std)
-{
-    my_printf("%05d", 42);
-    cr_assert_stdout_eq_str("00042");
-}
-
-Test(my_printf, print_flag_zero_minus, .init = redirect_all_std)
-{
-    my_printf("%0-5d", 42);
-    cr_assert_stdout_eq_str("42   ");
-}
-
 Test(my_printf, print_flag_hastag_octal, .init = redirect_all_std)
 {
     my_printf("%#o", 15);
@@ -210,6 +186,18 @@ Test(my_printf, print_flag_plus, .init = redirect_all_std)
     cr_assert_stdout_eq_str("+15");
 }
 
+Test(my_printf, print_uns_flag_plus, .init = redirect_all_std)
+{
+    my_printf("%+u", 15);
+    cr_assert_stdout_eq_str("15");
+}
+
+Test(my_printf, print_neg_flag_zero, .init = redirect_all_std)
+{
+    my_printf("%0+5d", -15);
+    cr_assert_stdout_eq_str("-0015");
+}
+
 Test(my_printf, print_flag_plus_zero, .init = redirect_all_std)
 {
     my_printf("%0+5d", 15);
@@ -222,8 +210,184 @@ Test(my_printf, print_flag_plus_spaces, .init = redirect_all_std)
     cr_assert_stdout_eq_str("  +15");
 }
 
+Test(my_printf, print_uns_flag_plus_spaces, .init = redirect_all_std)
+{
+    my_printf("%+5u", 15);
+    cr_assert_stdout_eq_str("   15");
+}
+
 Test(my_printf, print_flag_plus_spaces_minus, .init = redirect_all_std)
 {
     my_printf("%0-+5d", 15);
     cr_assert_stdout_eq_str("+15   ");
+}
+
+Test(my_printf, print_flag_blank, .init = redirect_all_std)
+{
+    my_printf("% d", 15);
+    cr_assert_stdout_eq_str(" 15");
+}
+
+Test(my_printf, print_uns_flag_blank, .init = redirect_all_std)
+{
+    my_printf("% u", 15);
+    cr_assert_stdout_eq_str("15");
+}
+
+Test(my_printf, print_override_blank_sign, .init = redirect_all_std)
+{
+    my_printf("% +d", 15);
+    cr_assert_stdout_eq_str("+15");
+}
+
+// ----- //
+
+Test(my_printf, print_octal_field_width, .init = redirect_all_std)
+{
+    my_printf("%5o", 15);
+    cr_assert_stdout_eq_str("   17");
+}
+
+Test(my_printf, print_octal_field_width_too_small, .init = redirect_all_std)
+{
+    my_printf("%1o", 15);
+    cr_assert_stdout_eq_str("17");
+}
+
+Test(my_printf, print_octal_minus, .init = redirect_all_std)
+{
+    my_printf("%-5o", 15);
+    cr_assert_stdout_eq_str("17   ");
+}
+
+Test(my_printf, print_octal_minus_too_small, .init = redirect_all_std)
+{
+    my_printf("%-1o", 15);
+    cr_assert_stdout_eq_str("17");
+}
+
+Test(my_printf, print_octal_zero, .init = redirect_all_std)
+{
+    my_printf("%05o", 15);
+    cr_assert_stdout_eq_str("00017");
+}
+
+Test(my_printf, print_octal_hastag, .init = redirect_all_std)
+{
+    my_printf("%#05o", 15);
+    cr_assert_stdout_eq_str("00017");
+}
+
+// ----- //
+
+Test(my_printf, print_hexa_field_width, .init = redirect_all_std)
+{
+    my_printf("%5x", 255);
+    cr_assert_stdout_eq_str("   ff");
+}
+
+Test(my_printf, print_hexa_field_width_to_small, .init = redirect_all_std)
+{
+    my_printf("%1x", 255);
+    cr_assert_stdout_eq_str("ff");
+}
+
+Test(my_printf, print_hexa_minus, .init = redirect_all_std)
+{
+    my_printf("%-5x", 255);
+    cr_assert_stdout_eq_str("ff   ");
+}
+
+Test(my_printf, print_hexa_minus_too_small, .init = redirect_all_std)
+{
+    my_printf("%-1x", 255);
+    cr_assert_stdout_eq_str("ff");
+}
+
+Test(my_printf, print_hexa_zero, .init = redirect_all_std)
+{
+    my_printf("%05x", 255);
+    cr_assert_stdout_eq_str("000ff");
+}
+
+Test(my_printf, print_hexa_hastag, .init = redirect_all_std)
+{
+    my_printf("%#05x", 255);
+    cr_assert_stdout_eq_str("0x0ff");
+}
+
+// ----- //
+
+Test(my_printf, print_uphexa_field_width, .init = redirect_all_std)
+{
+    my_printf("%5X", 255);
+    cr_assert_stdout_eq_str("   FF");
+}
+
+Test(my_printf, print_uphexa_field_width_too_small, .init = redirect_all_std)
+{
+    my_printf("%1X", 255);
+    cr_assert_stdout_eq_str("FF");
+}
+
+Test(my_printf, print_uphexa_minus, .init = redirect_all_std)
+{
+    my_printf("%-5X", 255);
+    cr_assert_stdout_eq_str("FF   ");
+}
+
+Test(my_printf, print_uphexa_minus_too_small, .init = redirect_all_std)
+{
+    my_printf("%-1X", 255);
+    cr_assert_stdout_eq_str("FF");
+}
+
+Test(my_printf, print_uphexa_zero, .init = redirect_all_std)
+{
+    my_printf("%05X", 255);
+    cr_assert_stdout_eq_str("000FF");
+}
+
+Test(my_printf, print_uphexa_hastag, .init = redirect_all_std)
+{
+    my_printf("%#05X", 255);
+    cr_assert_stdout_eq_str("0X0FF");
+}
+
+// ----- //
+
+Test(my_printf, print_bin_field_width, .init = redirect_all_std)
+{
+    my_printf("%5b", 5);
+    cr_assert_stdout_eq_str("  101");
+}
+
+Test(my_printf, print_bin_field_width_too_small, .init = redirect_all_std)
+{
+    my_printf("%1b", 5);
+    cr_assert_stdout_eq_str("101");
+}
+
+Test(my_printf, print_bin_minus, .init = redirect_all_std)
+{
+    my_printf("%-5b", 5);
+    cr_assert_stdout_eq_str("101  ");
+}
+
+Test(my_printf, print_bin_minus_too_small, .init = redirect_all_std)
+{
+    my_printf("%-1b", 5);
+    cr_assert_stdout_eq_str("101");
+}
+
+Test(my_printf, print_bin_zero, .init = redirect_all_std)
+{
+    my_printf("%05b", 5);
+    cr_assert_stdout_eq_str("00101");
+}
+
+Test(my_printf, print_bin_hastag, .init = redirect_all_std)
+{
+    my_printf("%#05b", 5);
+    cr_assert_stdout_eq_str("b0101");
 }
