@@ -10,13 +10,15 @@
 
 #include <stdarg.h>
 #include <stdlib.h>
+#include "flags.h"
 
+#define NUMBER_FLAGS 5
 #define NUMBER_MODIFIERS 7
 #define NUMBER_SPECIFIERS 11
 #define FLAG_PTR_ID 0
 
 typedef void *(*va_list_fct_t) (va_list *arg);
-typedef void (*print_fct_t) (void *value);
+typedef void (*print_fct_t) (void *value, int flags, int fwidth);
 
 void *va_list_nbchar(va_list *arg);
 void *va_list_nbshort(va_list *arg);
@@ -28,17 +30,22 @@ void *va_list_char(va_list *arg);
 void *va_list_str(va_list *arg);
 void *va_list_ptr(va_list *arg);
 
-void print_nb(void *value);
-void print_unnb(void *value);
-void print_octal(void *value);
-void print_binary(void *value);
-void print_hexa(void *value);
-void print_uphexa(void *value);
+void print_nb(void *value, int flags, int fwidth);
+void print_unnb(void *value, int flags, int fwidth);
+void print_octal(void *value, int flags, int fwidth);
+void print_binary(void *value, int flags, int fwidth);
+void print_hexa(void *value, int flags, int fwidth);
+void print_uphexa(void *value, int flags, int fwidth);
 
-void print_char(void *value);
-void print_str(void *value);
-void print_fullstr(void *value);
-void print_ptr(void *value);
+void print_char(void *value, int flags, int fwidth);
+void print_str(void *value, int flags, int fwidth);
+void print_fullstr(void *value, int flags, int fwidth);
+void print_ptr(void *value, int flags, int fwidth);
+
+const char FLAGS[] = {'#', '0', '-', ' ', '+'};
+
+const char FLAG_VALUES[] = {FLAG_HASHTAG, FLAG_ZERO, FLAG_MINUS,
+                            FLAG_BLANK , FLAG_SIGN};
 
 const char *MODIFIERS[] = {"hh", "h", "ll", "l",
                             "j", "z", "t"};

@@ -8,7 +8,11 @@
 #ifndef MY_H_
 #define MY_H_
 
+#include <stdarg.h>
+
 int my_printf(char *str, ...);
+int my_vprintf(char *str, va_list arg_list);
+
 void my_putchar(char c);
 int my_putstr(char const *str);
 int my_put_fullstr(char const *str);

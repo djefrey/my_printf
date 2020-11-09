@@ -7,31 +7,47 @@
 
 #include "my.h"
 #include "nbr.h"
+#include "flags.h"
 
-void print_unnb(void *value)
+void print_unnb(void *value, int flags, int fwidth)
 {
     nbr_t *nbr = (nbr_t*) value;
 
     my_put_unnbr(nbr->unsign);
 }
 
-void print_octal(void *value)
+void print_octal(void *value, int flags, int fwidth)
 {
-    my_putchar('\\');
-    my_putnbr_base_w_zero(*((unsigned long long*) (value)), "01234567", 3);
+    nbr_t *nbr = (nbr_t*) value;
+
+    if (flags & FLAG_HASHTAG)
+        my_putstr("0");
+    my_putnbr_base(nbr->unsign, "01234567");
 }
 
-void print_binary(void *value)
+void print_binary(void *value, int flags, int fwidth)
 {
-    my_putunnbr_base(*((unsigned long long*) (value)), "01");
+    nbr_t *nbr = (nbr_t*) value;
+
+    if (flags & FLAG_HASHTAG)
+        my_putstr("b");
+    my_putunnbr_base(nbr->unsign, "01");
 }
 
-void print_hexa(void *value)
+void print_hexa(void *value, int flags, int fwidth)
 {
-    my_putunnbr_base(*((unsigned long long*) (value)), "0123456789abcdef");
+    nbr_t *nbr = (nbr_t*) value;
+
+    if (flags & FLAG_HASHTAG)
+        my_putstr("0x");
+    my_putunnbr_base(nbr->unsign, "0123456789abcdef");
 }
 
-void print_uphexa(void *value)
+void print_uphexa(void *value, int flags, int fwidth)
 {
-    my_putunnbr_base(*((unsigned long long*) (value)), "0123456789ABCDEF");
+    nbr_t *nbr = (nbr_t*) value;
+
+    if (flags & FLAG_HASHTAG)
+        my_putstr("0X");
+    my_putunnbr_base(nbr->unsign, "0123456789ABCDEF");
 }

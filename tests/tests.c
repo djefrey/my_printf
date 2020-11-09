@@ -105,7 +105,13 @@ Test(my_printf, print_ptr, .init = redirect_all_std)
 Test(my_printf, print_octal, .init = redirect_all_std)
 {
     my_printf("%o", 15);
-    cr_assert_stdout_eq_str("\\017");
+    cr_assert_stdout_eq_str("17");
+}
+
+Test(my_printf, print_octal_hashtag, .init = redirect_all_std)
+{
+    my_printf("%#o", 15);
+    cr_assert_stdout_eq_str("017");
 }
 
 Test(my_printf, print_binary, .init = redirect_all_std)
@@ -146,7 +152,7 @@ Test(my_printf, print_percent_flag, .init = redirect_all_std)
 
 Test(my_printf, print_no_flag, .init = redirect_all_std)
 {
-    my_printf("astek%42moulinette");
+    my_printf("astek%%42moulinette");
     cr_assert_stdout_eq_str("astek%42moulinette");
 }
 
