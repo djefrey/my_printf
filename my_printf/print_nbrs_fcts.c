@@ -25,6 +25,7 @@ void print_unnb(void *value, int flags, int fwidth)
         for (int i = 0; i < fwidth - len; i++)
             my_putchar(flags & FLAG_ZERO ? '0' : ' ');
     }
+    free(str);
 }
 
 void print_octal(void *value, int flags, int fwidth)
@@ -44,6 +45,7 @@ void print_octal(void *value, int flags, int fwidth)
         for (int i = 0; i < fwidth - len; i++)
             my_putchar(flags & FLAG_ZERO ? '0' : ' ');
     }
+    free(str);
 }
 
 void print_binary(void *value, int flags, int fwidth)
@@ -63,6 +65,7 @@ void print_binary(void *value, int flags, int fwidth)
         for (int i = 0; i < fwidth - len; i++)
             my_putchar(flags & FLAG_ZERO ? '0' : ' ');
     }
+    free(str);
 }
 
 void print_hexa(void *value, int flags, int fwidth)
@@ -82,6 +85,7 @@ void print_hexa(void *value, int flags, int fwidth)
         for (int i = 0; i < fwidth - len; i++)
             my_putchar(flags & FLAG_ZERO ? '0' : ' ');
     }
+    free(str);
 }
 
 void print_uphexa(void *value, int flags, int fwidth)
@@ -101,4 +105,5 @@ void print_uphexa(void *value, int flags, int fwidth)
         for (int i = 0; i < fwidth - len; i++)
             my_putchar(flags & FLAG_ZERO ? '0' : ' ');
     }
+    free(str);
 }

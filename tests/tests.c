@@ -161,3 +161,69 @@ Test(my_printf, print_unknown_flag, .init = redirect_all_std)
     my_printf("%m ");
     cr_assert_stdout_eq_str("%m ");
 }
+
+Test(my_printf, print_field_width, .init = redirect_all_std)
+{
+    my_printf("%5d", 42);
+    cr_assert_stdout_eq_str("   42");
+}
+
+Test(my_printf, print_flag_minus, .init = redirect_all_std)
+{
+    my_printf("%-5d", 42);
+    cr_assert_stdout_eq_str("42   ");
+}
+
+Test(my_printf, print_flag_zero, .init = redirect_all_std)
+{
+    my_printf("%05d", 42);
+    cr_assert_stdout_eq_str("00042");
+}
+
+Test(my_printf, print_flag_zero_minus, .init = redirect_all_std)
+{
+    my_printf("%0-5d", 42);
+    cr_assert_stdout_eq_str("42   ");
+}
+
+Test(my_printf, print_flag_hastag_octal, .init = redirect_all_std)
+{
+    my_printf("%#o", 15);
+    cr_assert_stdout_eq_str("017");
+}
+
+Test(my_printf, print_flag_hastag_hexa, .init = redirect_all_std)
+{
+    my_printf("%#x", 15);
+    cr_assert_stdout_eq_str("0xf");
+}
+
+Test(my_printf, print_flag_hastag_hexa_up, .init = redirect_all_std)
+{
+    my_printf("%#X", 15);
+    cr_assert_stdout_eq_str("0XF");
+}
+
+Test(my_printf, print_flag_plus, .init = redirect_all_std)
+{
+    my_printf("%+d", 15);
+    cr_assert_stdout_eq_str("+15");
+}
+
+Test(my_printf, print_flag_plus_zero, .init = redirect_all_std)
+{
+    my_printf("%0+5d", 15);
+    cr_assert_stdout_eq_str("+0015");
+}
+
+Test(my_printf, print_flag_plus_spaces, .init = redirect_all_std)
+{
+    my_printf("%+5d", 15);
+    cr_assert_stdout_eq_str("  +15");
+}
+
+Test(my_printf, print_flag_plus_spaces_minus, .init = redirect_all_std)
+{
+    my_printf("%0-+5d", 15);
+    cr_assert_stdout_eq_str("+15   ");
+}

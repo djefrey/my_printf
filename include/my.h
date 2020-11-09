@@ -15,7 +15,6 @@ int my_vprintf(char *str, va_list arg_list);
 
 void my_putchar(char c);
 int my_putstr(char const *str);
-int my_put_fullstr(char const *str);
 int my_strlen(char const *str);
 char *my_strdup(char const *src);
 char *my_strcpy(char *dest, char const *src);

@@ -31,6 +31,10 @@ static int check_flag(char **str, va_list *list, int *length)
 
     for (int i = 0; i < NUMBER_FLAGS; i++) {
         if (**str == FLAGS[i]) {
+            if (FLAG_VALUES[i] == FLAG_MINUS && flags & FLAG_ZERO)
+                flags -= FLAG_ZERO;
+            else if (FLAG_VALUES[i] == FLAG_SIGN && flags & FLAG_BLANK)
+                flags -= FLAG_BLANK;
             flags += FLAG_VALUES[i];
             *str += 1;
         }
