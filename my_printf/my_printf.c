@@ -16,12 +16,6 @@ static int print_percent(char **str)
     return (1);
 }
 
-/*static void print_specifier(int i, char **str, va_list *list,
-va_list_fct_t length_modif)
-{
-
-}*/
-
 static int check_flag(char **str, va_list *list, int *length)
 {
     void *value = NULL;
