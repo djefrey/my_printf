@@ -11,14 +11,15 @@ SRC			=	my_printf/my_printf.c			\
 				my_printf/va_list_nbrs_fct.c	\
 				my_printf/print_fcts.c			\
 				my_printf/print_nbrs_fcts.c		\
+				my_printf/printf_get_nbr.c		\
+				my_printf/printf_get_nbr_base.c	\
 				my_putchar.c					\
 				my_putstr.c						\
 				my_strlen.c						\
-				my_put_nbr.c					\
-				my_putnbr_base.c				\
 				my_strcpy.c						\
 				my_strdup.c						\
-				my_strcmp.c
+				my_strcmp.c						\
+				my_revstr.c
 TESTS		=	./tests/tests.c
 INC_DIR		=	./include/
 CFLAGS 		+= -W -Wall -I$(INC_DIR)
@@ -34,8 +35,10 @@ all:	$(NAME)
 $(NAME):	$(OBJ)
 	ar -crs $(NAME) $(OBJ)
 
-main:	$(NAME)	$(MAIN_OBJ)
-	gcc -o $(NAME_MAIN) $(MAIN_OBJ) -I$(INC_DIR) -L. -lmy
+tests_run:	CFLAGS += -g
+main:	clean	$(NAME)	$(MAIN_OBJ)
+	gcc -o $(NAME_MAIN) $(MAIN_OBJ) -I$(INC_DIR) -L. -lmy -g
+	./$(NAME_MAIN)
 
 tests_run:	CFLAGS += --coverage
 tests_run:	clean	$(NAME)	$(TESTS_OBJ)

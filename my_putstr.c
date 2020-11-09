@@ -19,6 +19,8 @@ int my_putstr(char const *str)
 int my_put_fullstr(char const *str)
 {
     char c;
+    char *nbr_str;
+    int len;
 
     for (int i = 0; str[i]; i++) {
         c = str[i];
@@ -26,7 +28,11 @@ int my_put_fullstr(char const *str)
             my_putchar(c);
         else {
             my_putchar('\\');
-            my_putnbr_base_w_zero(c, "01234567", 3);
+            nbr_str = printf_get_unbr_base(c, "01234567", 0);
+            len = my_strlen(nbr_str);
+            for (int i = 3; i - len > 0; i--)
+                my_putchar('0');
+            my_putstr(nbr_str);
         }
     }
     return (0);

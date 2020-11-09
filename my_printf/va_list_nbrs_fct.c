@@ -17,7 +17,6 @@ void *va_list_nbchar(va_list *arg)
 
     nbr_ptr->unsign = (unsigned char) value;
     nbr_ptr->sign = (char) value;
-    nbr_ptr->size = sizeof(char);
     return (nbr_ptr);
 }
 
@@ -28,7 +27,6 @@ void *va_list_nbshort(va_list *arg)
 
     nbr_ptr->unsign = (unsigned short) value;
     nbr_ptr->sign = (short) value;
-    nbr_ptr->size = sizeof(short);
     return (nbr_ptr);
 }
 
@@ -39,7 +37,6 @@ void *va_list_nbint(va_list *arg)
 
     nbr_ptr->unsign = (unsigned int) value;
     nbr_ptr->sign = (int) value;
-    nbr_ptr->size = sizeof(int);
     return (nbr_ptr);
 }
 
@@ -50,7 +47,6 @@ void *va_list_nblong(va_list *arg)
 
     nbr_ptr->unsign = (unsigned long) value;
     nbr_ptr->sign = (long) value;
-    nbr_ptr->size = sizeof(long);
     return (nbr_ptr);
 }
 
@@ -61,6 +57,5 @@ void *va_list_nblonglong(va_list *arg)
 
     nbr_ptr->unsign = (unsigned long long) value;
     nbr_ptr->sign = (long long) value;
-    nbr_ptr->size = sizeof(long long);
     return (nbr_ptr);
 }

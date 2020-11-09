@@ -13,7 +13,6 @@
 typedef struct nbr {
     unsigned long long unsign;
     long long sign;
-    size_t size;
 } nbr_t;
 
 #endif /* !NBR_H_ */
