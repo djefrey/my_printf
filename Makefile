@@ -20,8 +20,7 @@ SRC			=	my_printf/my_printf.c			\
 				my_strcpy.c						\
 				my_strdup.c						\
 				my_strcmp.c						\
-				my_revstr.c						\
-				my_intstr.c
+				my_revstr.c
 TESTS		=	./tests/tests.c
 INC_DIR		=	./include/
 CFLAGS 		+= -W -Wall -I$(INC_DIR)
