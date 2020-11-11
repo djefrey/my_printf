@@ -38,7 +38,6 @@ all:	$(NAME)
 $(NAME):	$(OBJ)
 	ar -crs $(NAME) $(OBJ)
 
-tests_run:	CFLAGS += -g
 main:	clean	$(NAME)	$(MAIN_OBJ)
 	gcc -o $(NAME_MAIN) $(MAIN_OBJ) -I$(INC_DIR) -L. -lmy -g
 	./$(NAME_MAIN)
