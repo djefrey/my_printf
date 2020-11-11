@@ -240,6 +240,12 @@ Test(my_printf, print_override_blank_sign, .init = redirect_all_std)
     cr_assert_stdout_eq_str("+15");
 }
 
+Test(my_printf, print_flags_in_disorder, .init = redirect_all_std)
+{
+    my_printf("%0#+10d", 50);
+    cr_assert_stdout_eq_str("+000000050");
+}
+
 // ----- //
 
 Test(my_printf, print_octal_field_width, .init = redirect_all_std)

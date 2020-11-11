@@ -20,6 +20,7 @@ va_list_fct_t *length_modif, int *length)
                 *flags -= FLAG_BLANK;
             *flags += FLAG_VALUES[i];
             *str += 1;
+            i = -1;
         }
     }
     for (int i = 0; i < NUMBER_MODIFIERS; i++) {
