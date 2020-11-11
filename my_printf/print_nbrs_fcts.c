@@ -12,7 +12,7 @@
 #include "printf_get_fcts.h"
 #include "print_field_width.h"
 
-void print_unnb(void *value, int flags, int fwidth)
+int print_unnb(void *value, int flags, int fwidth)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr(nbr->unsign);
@@ -25,7 +25,7 @@ void print_unnb(void *value, int flags, int fwidth)
     return (len > fwidth ? len : fwidth);
 }
 
-void print_octal(void *value, int flags, int fwidth)
+int print_octal(void *value, int flags, int fwidth)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr_base(nbr->unsign, "01234567");
@@ -40,7 +40,7 @@ void print_octal(void *value, int flags, int fwidth)
     return (len > fwidth ? len : fwidth);
 }
 
-void print_binary(void *value, int flags, int fwidth)
+int print_binary(void *value, int flags, int fwidth)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr_base(nbr->unsign, "01");
@@ -56,7 +56,7 @@ void print_binary(void *value, int flags, int fwidth)
     return (len > fwidth ? len : fwidth);
 }
 
-void print_hexa(void *value, int flags, int fwidth)
+int print_hexa(void *value, int flags, int fwidth)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr_base(nbr->unsign, "0123456789abcdef");
@@ -72,7 +72,7 @@ void print_hexa(void *value, int flags, int fwidth)
     return (len > fwidth ? len : fwidth);
 }
 
-void print_uphexa(void *value, int flags, int fwidth)
+int print_uphexa(void *value, int flags, int fwidth)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr_base(nbr->unsign, "0123456789ABCDEF");

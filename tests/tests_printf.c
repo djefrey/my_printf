@@ -256,6 +256,15 @@ Test(my_printf, flag_n, .init = redirect_all_std)
     cr_assert_eq(test2, 107);
 }
 
+Test(my_printf, flag_n_with_other_flags, .init = redirect_all_std)
+{
+    int test1 = 0;
+
+    my_printf("Test %+#015X%n", 0X60ABC42,&test1);
+    cr_assert_stdout_eq_str("Test 0X00000060ABC42");
+    cr_assert_eq(test1, 20);
+}
+
 // ----- //
 
 Test(my_printf, print_octal_field_width, .init = redirect_all_std)
