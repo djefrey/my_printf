@@ -5,6 +5,7 @@
 ** print number that is provided
 */
 
+#include <stdlib.h>
 #include "my.h"
 #include "flags.h"
 
@@ -59,7 +60,7 @@ char *printf_get_nbr(long long nb, int flags)
     return (str);
 }
 
-char *printf_get_unbr(unsigned long long unb, int flags)
+char *printf_get_unbr(unsigned long long unb)
 {
     int digit;
     unsigned long long length = get_nbr_length(unb);

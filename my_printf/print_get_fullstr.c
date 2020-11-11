@@ -5,6 +5,10 @@
 ** print_get_fullstr
 */
 
+#include <stdlib.h>
+#include "my.h"
+#include "printf_get_fcts.h"
+
 static int get_fullstr_length(char *str)
 {
     int length = 0;
@@ -32,7 +36,7 @@ char *printf_get_fullstr(char *str)
             result[pos] = str[i];
         } else {
             result[pos] = '\\';
-            nbr_str = printf_get_unbr_base(str[i], "01234567", 0);
+            nbr_str = printf_get_unbr_base(str[i], "01234567");
             nbr_len = my_strlen(nbr_str);
             for (int j = 0; j < 3; j++)
                 result[pos + 1 + j] = (j + nbr_len) - 3 >= 0 ?

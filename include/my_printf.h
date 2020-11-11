@@ -20,7 +20,8 @@
 typedef void *(*va_list_fct_t) (va_list *arg);
 typedef void (*print_fct_t) (void *value, int flags, int fwidth);
 
-char *printf_get_fullstr(char *str);
+int my_printf(char *str, ...);
+int my_vprintf(char *str, va_list arg_list);
 
 void *va_list_nbchar(va_list *arg);
 void *va_list_nbshort(va_list *arg);

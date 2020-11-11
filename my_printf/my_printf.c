@@ -49,7 +49,7 @@ static int check_flag(char **str, va_list *list, int *length)
     int flags = 0;
     int field_width = 0;
 
-    check_flags_and_modifiers(str, &flags, &length_modif, &length);
+    check_flags_and_modifiers(str, &flags, &length_modif, length);
     while (**str >= '0' && **str <= '9') {
         field_width = field_width * 10 + (**str - 48);
         *str += 1;
@@ -72,17 +72,17 @@ static int check_flag(char **str, va_list *list, int *length)
     return (0);
 }
 
-int my_printf(char *str, ...)
+int my_vprintf(char *str, va_list arg_list)
 {
-    va_list arg_list;
     int length = 0;
+    va_list arg_cpy;
 
-    va_start(arg_list, str);
+    va_copy(arg_cpy, arg_list);
     while (*str) {
         if (*str == '%') {
             str += 1;
             length += 1;
-            if (!check_flag(&str, &arg_list, &length)) {
+            if (!check_flag(&str, &arg_cpy, &length)) {
                 my_putchar('%');
                 my_putchar(*str);
                 str += 1;
@@ -94,6 +94,16 @@ int my_printf(char *str, ...)
             length += 1;
         }
     }
+    return (length);
+}
+
+int my_printf(char *str, ...)
+{
+    va_list arg_list;
+    int length;
+
+    va_start(arg_list, str);
+    length = my_vprintf(str, arg_list);
     va_end(arg_list);
     return (length);
 }

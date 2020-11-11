@@ -14,6 +14,7 @@ SRC			=	my_printf/my_printf.c			\
 				my_printf/printf_get_nbr.c		\
 				my_printf/printf_get_nbr_base.c	\
 				my_printf/print_get_fullstr.c	\
+				my_printf/printf_field_width.c	\
 				my_putchar.c					\
 				my_putstr.c						\
 				my_strlen.c						\
@@ -21,7 +22,8 @@ SRC			=	my_printf/my_printf.c			\
 				my_strdup.c						\
 				my_strcmp.c						\
 				my_revstr.c
-TESTS		=	./tests/tests.c
+TESTS		=	./tests/tests_printf.c			\
+				./tests/tests_bases.c
 INC_DIR		=	./include/
 CFLAGS 		+= -W -Wall -I$(INC_DIR)
 MAIN_OBJ	=	$(MAIN:.c=.o)
