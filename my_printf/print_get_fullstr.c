@@ -32,7 +32,7 @@ char *printf_get_fullstr(char *str)
 
     result[length] = 0;
     for (int i = 0; str[i]; i++, pos++) {
-        if (str[i] >= 32) {
+        if (str[i] >= 32 && str[i] < 127) {
             result[pos] = str[i];
         } else {
             result[pos] = '\\';

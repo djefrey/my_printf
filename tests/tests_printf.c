@@ -75,13 +75,22 @@ Test(my_printf, print_strs, .init = redirect_all_std)
     cr_assert_stdout_eq_str("Bonjour à tous, je sais pas quoi dire donc je rempli");
 }
 
-Test(my_printf, print_fullstr, .init = redirect_all_std)
+Test(my_printf, print_fullstr_small, .init = redirect_all_std)
 {
     char str[] = "42";
 
     str[0] = 4;
     my_printf("Le nombre est %S", str);
     cr_assert_stdout_eq_str("Le nombre est \\0042");
+}
+
+Test(my_printf, print_fullstr_bug, .init = redirect_all_std)
+{
+    char str[] = "Del x";
+
+    str[4] = 127;
+    my_printf("Faut bien test %S", str);
+    cr_assert_stdout_eq_str("Faut bien test Del \\177");
 }
 
 Test(my_printf, print_fullstrduo, .init = redirect_all_std)
