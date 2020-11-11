@@ -18,7 +18,7 @@
 #define FLAG_PTR_ID 0
 
 typedef void *(*va_list_fct_t) (va_list *arg);
-typedef void (*print_fct_t) (void *value, int flags, int fwidth);
+typedef int (*print_fct_t) (void *value, int flags, int fwidth);
 
 int my_printf(char *str, ...);
 int my_vprintf(char *str, va_list arg_list);
@@ -33,17 +33,17 @@ void *va_list_char(va_list *arg);
 void *va_list_str(va_list *arg);
 void *va_list_ptr(va_list *arg);
 
-void print_nb(void *value, int flags, int fwidth);
-void print_unnb(void *value, int flags, int fwidth);
-void print_octal(void *value, int flags, int fwidth);
-void print_binary(void *value, int flags, int fwidth);
-void print_hexa(void *value, int flags, int fwidth);
-void print_uphexa(void *value, int flags, int fwidth);
+int print_nb(void *value, int flags, int fwidth);
+int print_unnb(void *value, int flags, int fwidth);
+int print_octal(void *value, int flags, int fwidth);
+int print_binary(void *value, int flags, int fwidth);
+int print_hexa(void *value, int flags, int fwidth);
+int print_uphexa(void *value, int flags, int fwidth);
 
-void print_char(void *value, int flags, int fwidth);
-void print_str(void *value, int flags, int fwidth);
-void print_fullstr(void *value, int flags, int fwidth);
-void print_ptr(void *value, int flags, int fwidth);
+int print_char(void *value, int flags, int fwidth);
+int print_str(void *value, int flags, int fwidth);
+int print_fullstr(void *value, int flags, int fwidth);
+int print_ptr(void *value, int flags, int fwidth);
 
 const char FLAGS[] = {'#', '0', '-', ' ', '+'};
 

@@ -22,6 +22,7 @@ void print_unnb(void *value, int flags, int fwidth)
     my_putstr(str);
     print_right_spaces(fwidth, len, flags);
     free(str);
+    return (len > fwidth ? len : fwidth);
 }
 
 void print_octal(void *value, int flags, int fwidth)
@@ -36,6 +37,7 @@ void print_octal(void *value, int flags, int fwidth)
     my_putstr(str);
     print_right_spaces(fwidth, len, flags);
     free(str);
+    return (len > fwidth ? len : fwidth);
 }
 
 void print_binary(void *value, int flags, int fwidth)
@@ -51,6 +53,7 @@ void print_binary(void *value, int flags, int fwidth)
     my_putstr(str);
     print_right_spaces(fwidth, len, flags);
     free(str);
+    return (len > fwidth ? len : fwidth);
 }
 
 void print_hexa(void *value, int flags, int fwidth)
@@ -66,6 +69,7 @@ void print_hexa(void *value, int flags, int fwidth)
     my_putstr(str);
     print_right_spaces(fwidth, len, flags);
     free(str);
+    return (len > fwidth ? len : fwidth);
 }
 
 void print_uphexa(void *value, int flags, int fwidth)
@@ -81,4 +85,5 @@ void print_uphexa(void *value, int flags, int fwidth)
     my_putstr(str);
     print_right_spaces(fwidth, len, flags);
     free(str);
+    return (len > fwidth ? len : fwidth);
 }

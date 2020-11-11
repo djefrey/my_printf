@@ -10,7 +10,7 @@
 #include "my.h"
 
 static void check_flags_and_modifiers(char **str, int *flags,
-va_list_fct_t *length_modif, int *length)
+va_list_fct_t *length_modif)
 {
     for (int i = 0; i < NUMBER_FLAGS; i++) {
         if (**str == FLAGS[i]) {
@@ -27,16 +27,23 @@ va_list_fct_t *length_modif, int *length)
         if (!my_strcmp(*str, MODIFIERS[i])) {
             *length_modif = VA_LIST_MOD[i];
             *str += my_strlen(MODIFIERS[i]);
-            *length += my_strlen(MODIFIERS[i]);
             break;
         }
     }
 }
 
-static int check_special_flags(char **str)
+static int check_special_flags(char **str,  va_list *list, int *length)
 {
+    int *ptr;
+
     if (**str == '%') {
         my_putchar('%');
+        *str += 1;
+        *length += 1;
+        return (1);
+    } else if (**str == 'n') {
+        ptr = va_arg(*list, int*);
+        *ptr = (int) *length;
         *str += 1;
         return (1);
     }
@@ -50,23 +57,21 @@ static int check_flag(char **str, va_list *list, int *length)
     int flags = 0;
     int field_width = 0;
 
-    check_flags_and_modifiers(str, &flags, &length_modif, length);
+    check_flags_and_modifiers(str, &flags, &length_modif);
     while (**str >= '0' && **str <= '9') {
         field_width = field_width * 10 + (**str - 48);
         *str += 1;
     }
-    if (check_special_flags(str))
+    if (check_special_flags(str, list, length))
         return (1);
     for (int i = 0; i < NUMBER_SPECIFIERS; i++) {
         if (**str == SPECIFIERS[i]) {
             value = VA_LIST_SPEC[i] != NULL ?
             VA_LIST_SPEC[i](list) : (*length_modif)(list);
-
-            PRINT_FCTS[i](value, flags, field_width);
+            *length += PRINT_FCTS[i](value, flags, field_width);
             if (i != FLAG_PTR_ID)
                 free(value);
             *str += 1;
-            *length += 1;
             return (1);
         }
     }
@@ -82,12 +87,11 @@ int my_vprintf(char *str, va_list arg_list)
     while (*str) {
         if (*str == '%') {
             str += 1;
-            length += 1;
             if (!check_flag(&str, &arg_cpy, &length)) {
                 my_putchar('%');
                 my_putchar(*str);
                 str += 1;
-                length += 1;
+                length += 2;
             }
         } else {
             my_putchar(*str);

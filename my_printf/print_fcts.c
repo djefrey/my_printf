@@ -12,7 +12,7 @@
 #include "printf_get_fcts.h"
 #include "print_field_width.h"
 
-void print_nb(void *value, int flags, int fwidth)
+int print_nb(void *value, int flags, int fwidth)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_nbr(nbr->sign, flags);
@@ -27,16 +27,18 @@ void print_nb(void *value, int flags, int fwidth)
     my_putstr(str + offset);
     print_right_spaces(fwidth, len, flags);
     free(str);
+    return (len > fwidth ? len : fwidth);
 }
 
-void print_char(void *value, int flags, int fwidth)
+int print_char(void *value, int flags, int fwidth)
 {
     print_left_spaces(fwidth, 1, flags);
     my_putchar(*((char*) (value)));
     print_right_spaces(fwidth, 1, flags);
+    return (fwidth > 1 ? fwidth : 1);
 }
 
-void print_str(void *value, int flags, int fwidth)
+int print_str(void *value, int flags, int fwidth)
 {
     char *str = (char*) (value);
     int len = my_strlen(str);
@@ -44,9 +46,10 @@ void print_str(void *value, int flags, int fwidth)
     print_left_spaces(fwidth, len, flags);
     my_putstr(str);
     print_right_spaces(fwidth, len, flags);
+    return (len > fwidth ? len : fwidth);
 }
 
-void print_fullstr(void *value, int flags, int fwidth)
+int print_fullstr(void *value, int flags, int fwidth)
 {
     char *str = printf_get_fullstr((char*) value);
     int len = my_strlen(str);
@@ -54,9 +57,10 @@ void print_fullstr(void *value, int flags, int fwidth)
     print_left_spaces(fwidth, len, flags);
     my_putstr(str);
     print_right_spaces(fwidth, len, flags);
+    return (len > fwidth ? len : fwidth);
 }
 
-void print_ptr(void *value, int flags, int fwidth)
+int print_ptr(void *value, int flags, int fwidth)
 {
     char *str = printf_get_unbr_base((long) (value), "0123456789abcdef");
     int len = my_strlen(str) + 2;
@@ -72,4 +76,5 @@ void print_ptr(void *value, int flags, int fwidth)
     my_putstr(str + offset);
     print_right_spaces(fwidth, len, flags);
     free(str);
+    return (len > fwidth ? len : fwidth);
 }
