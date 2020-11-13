@@ -12,78 +12,86 @@
 #include "printf_get_fcts.h"
 #include "print_field_width.h"
 
-int print_unnb(void *value, int flags, int fwidth)
+int print_unnb(void *value, int flags, int fwidth, int precision)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr(nbr->unsign);
     int len = my_strlen(str);
 
-    print_zeros_or_spaces(fwidth, len, flags);
+    print_zeros_or_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
+    print_zeros(precision - len, FLAG_ZERO);
     my_putstr(str);
-    print_right_spaces(fwidth, len, flags);
+    print_right_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     free(str);
     return (len > fwidth ? len : fwidth);
 }
 
-int print_octal(void *value, int flags, int fwidth)
+int print_octal(void *value, int flags, int fwidth, int precision)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr_base(nbr->unsign, "01234567");
     int len = my_strlen(str) + (flags & FLAG_HASHTAG);
 
-    print_zeros_or_spaces(fwidth, len, flags);
+    print_zeros_or_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
+    print_zeros(precision - len, FLAG_ZERO);
     if (flags & FLAG_HASHTAG)
         my_putchar('0');
     my_putstr(str);
-    print_right_spaces(fwidth, len, flags);
+    print_right_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     free(str);
     return (len > fwidth ? len : fwidth);
 }
 
-int print_binary(void *value, int flags, int fwidth)
+int print_binary(void *value, int flags, int fwidth, int precision)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr_base(nbr->unsign, "01");
     char len = my_strlen(str) + (flags & FLAG_HASHTAG);
 
-    print_left_spaces(fwidth, len, flags);
+    if (fwidth > precision)
+        print_left_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     if (flags & FLAG_HASHTAG)
         my_putchar('b');
-    print_zeros(fwidth, len, flags);
+    print_zeros(precision > len ? fwidth - precision : fwidth - len, flags);
+    print_zeros(precision - len, FLAG_ZERO);
     my_putstr(str);
-    print_right_spaces(fwidth, len, flags);
+    print_right_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     free(str);
     return (len > fwidth ? len : fwidth);
 }
 
-int print_hexa(void *value, int flags, int fwidth)
+int print_hexa(void *value, int flags, int fwidth, int precision)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr_base(nbr->unsign, "0123456789abcdef");
     int len = my_strlen(str) + (flags & FLAG_HASHTAG) * 2;
 
-    print_left_spaces(fwidth, len, flags);
+    if (fwidth > precision)
+        print_left_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     if (flags & FLAG_HASHTAG)
         my_putstr("0x");
-    print_zeros(fwidth, len, flags);
+    print_zeros(precision > len ? fwidth - precision : fwidth - len, flags);
+    print_zeros(precision - len, FLAG_ZERO);
     my_putstr(str);
-    print_right_spaces(fwidth, len, flags);
+    print_right_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     free(str);
     return (len > fwidth ? len : fwidth);
 }
 
-int print_uphexa(void *value, int flags, int fwidth)
+int print_uphexa(void *value, int flags, int fwidth, int precision)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_unbr_base(nbr->unsign, "0123456789ABCDEF");
     int len = my_strlen(str) + (flags & FLAG_HASHTAG) * 2;
 
-    print_left_spaces(fwidth, len, flags);
+    if (fwidth > precision)
+        print_left_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     if (flags & FLAG_HASHTAG)
         my_putstr("0X");
-    print_zeros(fwidth, len, flags);
+    print_zeros(precision > len ? fwidth - precision : fwidth - len, flags);
+    print_zeros(precision - len, FLAG_ZERO);
     my_putstr(str);
-    print_right_spaces(fwidth, len, flags);
+    print_right_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     free(str);
     return (len > fwidth ? len : fwidth);
 }

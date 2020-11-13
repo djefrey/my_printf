@@ -7,6 +7,7 @@
 
 MAIN		=	main.c
 SRC			=	my_printf/my_printf.c			\
+				my_printf/printf_conversion.c	\
 				my_printf/va_list_fct.c			\
 				my_printf/va_list_nbrs_fct.c	\
 				my_printf/print_fcts.c			\

@@ -8,9 +8,9 @@
 #ifndef PRINT_FIELD_WIDTH_H_
 #define PRINT_FIELD_WIDTH_H_
 
-int print_zeros_or_spaces(int fwidth, int len, int flags);
-int print_zeros(int fwidth, int len, int flags);
-int print_left_spaces(int fwidth, int len, int flags);
-int print_right_spaces(int fwidth, int len, int flags);
+int print_zeros_or_spaces(int n, int flags);
+int print_zeros(int n, int flags);
+int print_left_spaces(int n, int flags);
+int print_right_spaces(int n, int flags);
 
 #endif /* !PRINT_FIELD_WIDTH_H_ */

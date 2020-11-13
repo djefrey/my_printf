@@ -12,7 +12,7 @@
 #include "printf_get_fcts.h"
 #include "print_field_width.h"
 
-int print_nb(void *value, int flags, int fwidth)
+int print_nb(void *value, int flags, int fwidth, int precision)
 {
     nbr_t *nbr = (nbr_t*) value;
     char *str = printf_get_nbr(nbr->sign, flags);
@@ -23,58 +23,67 @@ int print_nb(void *value, int flags, int fwidth)
         my_putchar(str[0]);
         offset = 1;
     }
-    print_zeros_or_spaces(fwidth, len, flags);
+    print_zeros_or_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
+    print_zeros(precision - len, FLAG_ZERO);
     my_putstr(str + offset);
-    print_right_spaces(fwidth, len, flags);
+    print_right_spaces(fwidth - len, flags);
     free(str);
     return (len > fwidth ? len : fwidth);
 }
 
-int print_char(void *value, int flags, int fwidth)
+int print_char(void *value, int flags, int fwidth, int precision)
 {
-    print_left_spaces(fwidth, 1, flags);
+    print_left_spaces(fwidth - 1, flags);
     my_putchar(*((char*) (value)));
-    print_right_spaces(fwidth, 1, flags);
+    print_right_spaces(fwidth - 1, flags);
     return (fwidth > 1 ? fwidth : 1);
 }
 
-int print_str(void *value, int flags, int fwidth)
+int print_str(void *value, int flags, int fwidth, int precision)
 {
     char *str = (char*) (value);
     int len = my_strlen(str);
 
-    print_left_spaces(fwidth, len, flags);
-    my_putstr(str);
-    print_right_spaces(fwidth, len, flags);
+    print_left_spaces(precision < len ? fwidth - precision : fwidth - len, flags);
+    if (len > precision && precision > 0)
+        write(1, str, precision);
+    else
+        write(1, str, len);
+    print_left_spaces(precision < len ? fwidth - precision : fwidth - len, flags);
     return (len > fwidth ? len : fwidth);
 }
 
-int print_fullstr(void *value, int flags, int fwidth)
+int print_fullstr(void *value, int flags, int fwidth, int precision)
 {
     char *str = printf_get_fullstr((char*) value);
     int len = my_strlen(str);
 
-    print_left_spaces(fwidth, len, flags);
-    my_putstr(str);
-    print_right_spaces(fwidth, len, flags);
+    print_left_spaces(precision < len ? fwidth - precision : fwidth - len, flags);
+    if (len > precision && precision > 0)
+        write(1, str, precision);
+    else
+        write(1, str, len);
+    print_left_spaces(precision < len ? fwidth - precision : fwidth - len, flags);
     return (len > fwidth ? len : fwidth);
 }
 
-int print_ptr(void *value, int flags, int fwidth)
+int print_ptr(void *value, int flags, int fwidth, int precision)
 {
     char *str = printf_get_unbr_base((long) (value), "0123456789abcdef");
     int len = my_strlen(str) + 2;
     int offset = 0;
 
-    print_left_spaces(fwidth, len, flags);
+    if (fwidth > precision)
+        print_left_spaces(precision > len ? fwidth - precision : fwidth - len, flags);
     if (*str == '+' || *str == ' ') {
         my_putchar(*str);
         offset = 1;
     }
     my_putstr("0x");
-    print_zeros(fwidth, len, flags);
+    print_zeros(precision > len ? fwidth - precision : fwidth - len, flags);
+    print_zeros(precision - len, FLAG_ZERO);
     my_putstr(str + offset);
-    print_right_spaces(fwidth, len, flags);
+    print_right_spaces(fwidth - len, flags);
     free(str);
     return (len > fwidth ? len : fwidth);
 }

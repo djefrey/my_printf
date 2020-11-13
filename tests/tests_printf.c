@@ -111,6 +111,14 @@ Test(my_printf, print_ptr, .init = redirect_all_std)
     cr_assert_stdout_eq_str("0x112233acdef");
 }
 
+Test(my_printf, print_ptr_w_flags, .init = redirect_all_std)
+{
+    int *a = 0x112233acdef;
+
+    my_printf("%+015p", a);
+    cr_assert_stdout_eq_str("0x00112233acdef");
+}
+
 Test(my_printf, print_octal, .init = redirect_all_std)
 {
     my_printf("%o", 15);
@@ -272,6 +280,29 @@ Test(my_printf, flag_n_with_other_flags, .init = redirect_all_std)
     my_printf("Test %+#015X%n", 0X60ABC42,&test1);
     cr_assert_stdout_eq_str("Test 0X00000060ABC42");
     cr_assert_eq(test1, 20);
+}
+
+Test(my_printf, print_int_precision, .init = redirect_all_std)
+{
+    my_printf("I'm %.2i", 18000);
+    cr_assert_stdout_eq_str("I'm 18000");
+}
+
+Test(my_printf, print_int_precision_smaller, .init = redirect_all_std)
+{
+    my_printf("I'm %.5i", 18);
+    cr_assert_stdout_eq_str("I'm 00018");
+}
+
+Test(my_printf, print_str_precision, .init = redirect_all_std)
+{
+    my_printf("Hey, %.2s !", "slt");
+    cr_assert_stdout_eq_str("Hey, sl !");
+}
+Test(my_printf, print_str_precision_bigger, .init = redirect_all_std)
+{
+    my_printf("Hey, %.5s !", "slt");
+    cr_assert_stdout_eq_str("Hey, slt !");
 }
 
 // ----- //
