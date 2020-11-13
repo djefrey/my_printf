@@ -13,11 +13,11 @@ SRC			=	my_printf/my_printf.c			\
 				my_printf/print_fcts.c			\
 				my_printf/print_nbrs_fcts.c		\
 				my_printf/print_float_fcts.c	\
+				my_printf/print_field_width.c	\
 				my_printf/printf_get_nbr.c		\
 				my_printf/printf_get_nbr_base.c	\
 				my_printf/printf_get_float.c	\
-				my_printf/print_get_fullstr.c	\
-				my_printf/printf_field_width.c	\
+				my_printf/printf_get_fullstr.c	\
 				my_putchar.c					\
 				my_putstr.c						\
 				my_strlen.c						\

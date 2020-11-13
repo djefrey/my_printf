@@ -19,6 +19,7 @@ int print_nb(void *value, int flags, int fwidth, int precision)
     char *str = printf_get_nbr(nbr->sign, flags);
     int len = my_strlen(str);
     int offset = 0;
+    int biggest = fwidth > precision ? fwidth : precision;
 
     if (flags & FLAG_ZERO && (str[0] == '+' || str[0] == '-')) {
         my_putchar(str[0]);
@@ -31,7 +32,7 @@ int print_nb(void *value, int flags, int fwidth, int precision)
     print_right_spaces(precision > len ?
     fwidth - precision : fwidth - len, flags);
     free(str);
-    return (len > fwidth ? len : fwidth);
+    return (len > biggest ? len : biggest);
 }
 
 int print_char(void *value, int flags, int fwidth, int precision)
@@ -46,6 +47,7 @@ int print_str(void *value, int flags, int fwidth, int precision)
 {
     char *str = (char*) (value);
     int len = my_strlen(str);
+    int print_len = len > precision && precision > 0 ? precision : len;
 
     print_left_spaces(precision < len ?
     fwidth - precision : fwidth - len, flags);
@@ -55,13 +57,14 @@ int print_str(void *value, int flags, int fwidth, int precision)
         write(1, str, len);
     print_right_spaces(precision < len ?
     fwidth - precision : fwidth - len, flags);
-    return (len > fwidth ? len : fwidth);
+    return (print_len > fwidth ? print_len : fwidth);
 }
 
 int print_fullstr(void *value, int flags, int fwidth, int precision)
 {
     char *str = printf_get_fullstr((char*) value);
     int len = my_strlen(str);
+    int print_len = len > precision && precision > 0 ? precision : len;
 
     print_left_spaces(precision < len ?
     fwidth - precision : fwidth - len, flags);
@@ -71,7 +74,7 @@ int print_fullstr(void *value, int flags, int fwidth, int precision)
         write(1, str, len);
     print_right_spaces(precision < len ?
     fwidth - precision : fwidth - len, flags);
-    return (len > fwidth ? len : fwidth);
+    return (print_len > fwidth ? print_len : fwidth);
 }
 
 int print_ptr(void *value, int flags, int fwidth, int precision)
@@ -79,6 +82,7 @@ int print_ptr(void *value, int flags, int fwidth, int precision)
     char *str = printf_get_unbr_base((long) (value), "0123456789abcdef");
     int len = my_strlen(str) + 2;
     int offset = 0;
+    int biggest = fwidth > precision ? fwidth : precision;
 
     if (fwidth > precision)
         print_left_spaces(precision > len ?
@@ -95,5 +99,5 @@ int print_ptr(void *value, int flags, int fwidth, int precision)
     print_right_spaces(precision > len ?
     fwidth - precision : fwidth - len, flags);
     free(str);
-    return (len > fwidth ? len : fwidth);
+    return (len > biggest ? len : biggest);
 }
