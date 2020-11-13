@@ -42,7 +42,7 @@ char *printf_get_nbr(long long nb, int flags)
     char digit;
     unsigned long long unb = nb < 0 ? -nb : nb;
     unsigned long long length = get_nbr_length(unb);
-    char *str = malloc(sizeof(char) * (length + 1));
+    char *str = malloc(sizeof(char) * (length + 2));
     int start = 1;
     int end = length;
 
@@ -64,7 +64,7 @@ char *printf_get_unbr(unsigned long long unb)
 {
     int digit;
     unsigned long long length = get_nbr_length(unb);
-    char *str = malloc(sizeof(char) * (length));
+    char *str = malloc(sizeof(char) * (length + 1));
 
     str[length] = 0;
     for (int i = length - 1; i >= 0; i--) {

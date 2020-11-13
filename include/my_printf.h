@@ -35,6 +35,8 @@ void *va_list_char(va_list *arg);
 void *va_list_str(va_list *arg);
 void *va_list_ptr(va_list *arg);
 
+void *va_list_longdouble(va_list *arg);
+
 int print_nb(void *value, int flags, int fwidth, int precision);
 int print_unnb(void *value, int flags, int fwidth, int precision);
 int print_octal(void *value, int flags, int fwidth, int precision);
@@ -46,5 +48,7 @@ int print_char(void *value, int flags, int fwidth, int precision);
 int print_str(void *value, int flags, int fwidth, int precision);
 int print_fullstr(void *value, int flags, int fwidth, int precision);
 int print_ptr(void *value, int flags, int fwidth, int precision);
+
+int print_double(void *value, int flags, int fwidth, int precision);
 
 #endif /* !MY_PRINTF_H_ */

@@ -12,8 +12,10 @@ SRC			=	my_printf/my_printf.c			\
 				my_printf/va_list_nbrs_fct.c	\
 				my_printf/print_fcts.c			\
 				my_printf/print_nbrs_fcts.c		\
+				my_printf/print_float_fcts.c	\
 				my_printf/printf_get_nbr.c		\
 				my_printf/printf_get_nbr_base.c	\
+				my_printf/printf_get_float.c	\
 				my_printf/print_get_fullstr.c	\
 				my_printf/printf_field_width.c	\
 				my_putchar.c					\
@@ -24,7 +26,8 @@ SRC			=	my_printf/my_printf.c			\
 				my_strcmp.c						\
 				my_revstr.c
 TESTS		=	./tests/tests_printf.c			\
-				./tests/tests_bases.c
+				./tests/tests_bases.c			\
+				./tests/tests_float.c
 INC_DIR		=	./include/
 CFLAGS 		+= -W -Wall -I$(INC_DIR)
 MAIN_OBJ	=	$(MAIN:.c=.o)
@@ -39,6 +42,7 @@ all:	$(NAME)
 $(NAME):	$(OBJ)
 	ar -crs $(NAME) $(OBJ)
 
+main:	CFLAGS += -g
 main:	clean	$(NAME)	$(MAIN_OBJ)
 	gcc -o $(NAME_MAIN) $(MAIN_OBJ) -I$(INC_DIR) -L. -lmy -g
 	./$(NAME_MAIN)

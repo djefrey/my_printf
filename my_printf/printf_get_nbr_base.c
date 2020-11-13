@@ -43,7 +43,7 @@ char *printf_get_nbr_base(long long nb, char const *base, int flags)
     unsigned long long length = get_nbr_len(nb < 0 ? -nb : nb, base_size);
     char *str = malloc(sizeof(char) * (length + 1));
 
-    str[length + 1] = 0;
+    str[length] = 0;
     add_sign(&nb, str, length, flags);
     for (int i = 0; nb > 0; i++) {
         remainder = nb % base_size;

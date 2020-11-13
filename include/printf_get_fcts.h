@@ -15,4 +15,6 @@ char *printf_get_unbr(unsigned long long nb);
 char *printf_get_nbr_base(long long nb, char const *base, int flags);
 char *printf_get_unbr_base(unsigned long long nb, char const *base);
 
+char *printf_get_float(long double nb, int flags, int precision);
+
 #endif /* !MY_PRINT_NBR_H_ */
