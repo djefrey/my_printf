@@ -12,10 +12,10 @@
 #include "print_field_width.h"
 #include "printf_get_fcts.h"
 
-void *va_list_longdouble(va_list *arg)
+void *va_list_double(va_list *arg)
 {
-    long double value = (long double) (va_arg(*arg, long double));
-    long double *ptr = malloc(sizeof(long double));
+    double value = (double) (va_arg(*arg, double));
+    double *ptr = malloc(sizeof(double));
 
     *ptr = value;
     return (ptr);
@@ -23,7 +23,7 @@ void *va_list_longdouble(va_list *arg)
 
 int print_double(void *value, int flags, int fwidth, int precision)
 {
-    char *str =printf_get_float(*((long double*) (value)), precision, flags);
+    char *str =printf_get_float(*((double*) (value)), flags, precision);
     int len = my_strlen(str);
     int offset = 0;
 

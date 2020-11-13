@@ -529,3 +529,47 @@ Test(my_printf, print_bin_hastag_precision, .init = redirect_all_std)
     my_printf("%#05.10b", 5);
     cr_assert_stdout_eq_str("b000000101");
 }
+
+// ------------- //
+
+Test(my_printf, print_float, .init = redirect_all_std)
+{
+    my_printf("%f", 150.5);
+    cr_assert_stdout_eq_str("150.500000");
+}
+
+Test(my_printf, print_float_float_null, .init = redirect_all_std)
+{
+    my_printf("%f", 150.0);
+    cr_assert_stdout_eq_str("150.000000");
+}
+
+Test(my_printf, print_float_neg, .init = redirect_all_std)
+{
+    my_printf("%f", -150.5);
+    cr_assert_stdout_eq_str("-150.500000");
+}
+
+Test(my_printf, print_float_field_width, .init = redirect_all_std)
+{
+    my_printf("%15f", 150.5);
+    cr_assert_stdout_eq_str("     150.500000");
+}
+
+Test(my_printf, print_float_field_width_neg, .init = redirect_all_std)
+{
+    my_printf("%-15f", 150.5);
+    cr_assert_stdout_eq_str("150.500000     ");
+}
+
+Test(my_printf, print_float_field_width_zero, .init = redirect_all_std)
+{
+    my_printf("%015f", 150.5);
+    cr_assert_stdout_eq_str("00000150.500000");
+}
+
+Test(my_printf, print_float_precision, .init = redirect_all_std)
+{
+    my_printf("%10.2f", 150.237262);
+    cr_assert_stdout_eq_str("    150.23");
+}

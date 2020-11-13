@@ -10,16 +10,16 @@
 #include "flags.h"
 #include "printf_get_fcts.h"
 
-static char *add_float_digits(long double nb, int precision)
+static char *add_float_digits(double nb, int float_len)
 {
-    long double float_nbrs = nb - ((long long) nb);
-    char *str = malloc(sizeof(char) * (precision + 2));
+    double float_nbrs = nb - ((long long) nb);
+    char *str = malloc(sizeof(char) * (float_len + 2));
 
     if (str == NULL)
         return (NULL);
     str[0] = '.';
-    str[precision] = 0;
-    for (int i = 0; i < precision; i++) {
+    str[float_len] = 0;
+    for (int i = 0; i < float_len; i++) {
         float_nbrs = float_nbrs * 10.0;
         str[i + 1] = (char) (float_nbrs) + 48;
         float_nbrs -= (char) (float_nbrs);
@@ -27,7 +27,7 @@ static char *add_float_digits(long double nb, int precision)
     return (str);
 }
 
-char *printf_get_float(long double nb, int flags, int precision)
+char *printf_get_float(double nb, int flags, int precision)
 {
     char *nbr_str = printf_get_nbr((long long) nb, flags);
     int nbr_len = my_strlen(nbr_str);

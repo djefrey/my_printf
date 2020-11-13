@@ -40,7 +40,7 @@ const va_list_fct_t VA_LIST_SPEC[] = {&va_list_ptr,
                                 &va_list_char,
                                 &va_list_str, &va_list_str,
                                 NULL, NULL, NULL,
-                                &va_list_longdouble, &va_list_longdouble};
+                                &va_list_double, &va_list_double};
 
 const print_fct_t PRINT_FCTS[] = {&print_ptr,
                                 &print_octal, &print_unnb,

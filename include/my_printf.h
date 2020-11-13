@@ -35,7 +35,7 @@ void *va_list_char(va_list *arg);
 void *va_list_str(va_list *arg);
 void *va_list_ptr(va_list *arg);
 
-void *va_list_longdouble(va_list *arg);
+void *va_list_double(va_list *arg);
 
 int print_nb(void *value, int flags, int fwidth, int precision);
 int print_unnb(void *value, int flags, int fwidth, int precision);
