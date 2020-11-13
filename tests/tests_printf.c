@@ -299,10 +299,29 @@ Test(my_printf, print_str_precision, .init = redirect_all_std)
     my_printf("Hey, %.2s !", "slt");
     cr_assert_stdout_eq_str("Hey, sl !");
 }
+
 Test(my_printf, print_str_precision_bigger, .init = redirect_all_std)
 {
     my_printf("Hey, %.5s !", "slt");
     cr_assert_stdout_eq_str("Hey, slt !");
+}
+
+Test(my_printf, print_bin_precision, .init = redirect_all_std)
+{
+    my_printf("%-15.12b", 1565454);
+    cr_assert_stdout_eq_str("101111110001100001110");
+}
+
+Test(my_printf, print_hex_precision, .init = redirect_all_std)
+{
+    my_printf("%-6.3x", 0x54321);
+    cr_assert_stdout_eq_str("54321  ");
+}
+
+Test(my_printf, print_hex_precision_exceed, .init = redirect_all_std)
+{
+    my_printf("%-6.3d", 0x80000000);
+    cr_assert_stdout_eq_str("-2147483648");
 }
 
 // ----- //
