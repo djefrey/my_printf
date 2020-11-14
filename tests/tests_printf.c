@@ -317,15 +317,16 @@ Test(my_printf, flag_n, .init = redirect_all_std)
     cr_assert_stdout_eq_str("Hey!Test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     cr_assert_eq(test1, 4);
     cr_assert_eq(test2, 107);
+    cr_assert_eq(len, 107);
 }
 
 Test(my_printf, flag_n_with_other_flags, .init = redirect_all_std)
 {
     int test1 = 0;
-
     int len = my_printf("Test %+#015X%n", 0X60ABC42,&test1);
     cr_assert_stdout_eq_str("Test 0X00000060ABC42");
     cr_assert_eq(test1, 20);
+    cr_assert_eq(len, 20);
 }
 
 Test(my_printf, print_int_precision, .init = redirect_all_std)
