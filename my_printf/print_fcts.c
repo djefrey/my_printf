@@ -80,7 +80,7 @@ int print_fullstr(void *value, int flags, int fwidth, int precision)
 
 int print_ptr(void *value, int flags, int fwidth, int precision)
 {
-    char *str = printf_get_unbr_base((long) (value), "0123456789abcdef");
+    char *str = printf_get_nbr_base((long) (value), "0123456789abcdef", flags);
     int len = my_strlen(str) + 2;
     int offset = 0;
     int biggest = fwidth > precision ? fwidth : precision;

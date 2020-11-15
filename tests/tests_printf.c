@@ -137,7 +137,7 @@ Test(my_printf, print_ptr_w_flags, .init = redirect_all_std)
     int *a = 0x112233acdef;
 
     int len = my_printf("%+015p", a);
-    cr_assert_stdout_eq_str("0x00112233acdef");
+    cr_assert_stdout_eq_str("+0x0112233acdef");
     cr_assert_eq(len, 15);
 }
 
