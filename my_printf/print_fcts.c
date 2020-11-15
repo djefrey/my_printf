@@ -21,6 +21,7 @@ int print_nb(void *value, int flags, int fwidth, int precision)
     int offset = 0;
     int biggest = fwidth > precision ? fwidth : precision;
 
+    flags = precision && flags & FLAG_ZERO ? flags - FLAG_ZERO : flags;
     if (flags & FLAG_ZERO && (str[0] == '+' || str[0] == '-')) {
         my_putchar(str[0]);
         offset = 1;

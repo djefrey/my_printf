@@ -378,6 +378,13 @@ Test(my_printf, print_hex_precision_exceed, .init = redirect_all_std)
     cr_assert_eq(len, 11);
 }
 
+Test(my_printf, flag_zero_with_precision, .init = redirect_all_std)
+{
+    int len = my_printf("%05.3d", 4);
+    cr_assert_stdout_eq_str("  004");
+    cr_assert_eq(len, 5);
+}
+
 // ----- //
 
 Test(my_printf, print_octal_field_width, .init = redirect_all_std)
