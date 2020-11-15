@@ -385,6 +385,13 @@ Test(my_printf, flag_zero_with_precision, .init = redirect_all_std)
     cr_assert_eq(len, 5);
 }
 
+Test(my_printf, char_w_field_width, .init = redirect_all_std)
+{
+    int len = my_printf("%5c %-5c %05c", 'a', 'q', 'b');
+    cr_assert_stdout_eq_str("    a q         b");
+    cr_assert_eq(len, 17);
+}
+
 // ----- //
 
 Test(my_printf, print_octal_field_width, .init = redirect_all_std)
