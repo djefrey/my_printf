@@ -392,6 +392,15 @@ Test(my_printf, char_w_field_width, .init = redirect_all_std)
     cr_assert_eq(len, 17);
 }
 
+Test(my_printf, fullstr_precision, .init = redirect_all_std)
+{
+    char str[] = "Hey 42 !";
+    str[4] = 4;
+    int len = my_printf("%.9S", str);
+    cr_assert_stdout_eq_str("Hey \\0042");
+    cr_assert_eq(len, 9);
+}
+
 // ----- //
 
 Test(my_printf, print_octal_field_width, .init = redirect_all_std)
@@ -651,6 +660,13 @@ Test(my_printf, print_float_field_width, .init = redirect_all_std)
 {
     int len = my_printf("%15f", 150.5);
     cr_assert_stdout_eq_str("     150.500000");
+    cr_assert_eq(len, 15);
+}
+
+Test(my_printf, print_float_flag_plus_zero, .init = redirect_all_std)
+{
+    int len = my_printf("%+015f", 150.5);
+    cr_assert_stdout_eq_str("+0000150.500000");
     cr_assert_eq(len, 15);
 }
 
