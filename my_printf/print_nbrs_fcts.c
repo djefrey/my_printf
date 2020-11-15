@@ -57,6 +57,7 @@ int print_binary(void *value, int flags, int fwidth, int precision)
     char len = my_strlen(str) + (flags & FLAG_HASHTAG);
     int biggest = fwidth > precision ? fwidth : precision;
 
+    precision = precision ? precision + (flags & FLAG_HASHTAG) : 0;
     flags = precision && flags & FLAG_ZERO ? flags - FLAG_ZERO : flags;
     if (fwidth > precision)
         print_left_spaces(precision > len ?
@@ -80,6 +81,7 @@ int print_hexa(void *value, int flags, int fwidth, int precision)
     int len = my_strlen(str) + (flags & FLAG_HASHTAG) * 2;
     int biggest = fwidth > precision ? fwidth : precision;
 
+    precision = precision ? precision + (flags & FLAG_HASHTAG) * 2 : 0;
     flags = precision && flags & FLAG_ZERO ? flags - FLAG_ZERO : flags;
     if (fwidth > precision)
         print_left_spaces(precision > len ?
@@ -102,6 +104,7 @@ int print_uphexa(void *value, int flags, int fwidth, int precision)
     int len = my_strlen(str) + (flags & FLAG_HASHTAG) * 2;
     int biggest = fwidth > precision ? fwidth : precision;
 
+    precision = precision ? precision + (flags & FLAG_HASHTAG) * 2 : 0;
     flags = precision && flags & FLAG_ZERO ? flags - FLAG_ZERO : flags;
     if (fwidth > precision)
         print_left_spaces(precision > len ?

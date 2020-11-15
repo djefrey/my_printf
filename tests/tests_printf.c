@@ -497,7 +497,7 @@ Test(my_printf, print_hexa_hastag, .init = redirect_all_std)
 Test(my_printf, print_hexa_hastag_precision, .init = redirect_all_std)
 {
     int len = my_printf("%#05.10x", 255);
-    cr_assert_stdout_eq_str("0x000000ff");
+    cr_assert_stdout_eq_str("0x00000000ff");
     cr_assert_eq(len, 10);
 }
 
@@ -555,7 +555,7 @@ Test(my_printf, print_uphexa_hastag, .init = redirect_all_std)
 Test(my_printf, print_uphexa_hastag_precision, .init = redirect_all_std)
 {
     int len = my_printf("%#05.10X", 255);
-    cr_assert_stdout_eq_str("0X000000FF");
+    cr_assert_stdout_eq_str("0X00000000FF");
     cr_assert_eq(len, 10);
 }
 
@@ -613,7 +613,7 @@ Test(my_printf, print_bin_hastag, .init = redirect_all_std)
 Test(my_printf, print_bin_hastag_precision, .init = redirect_all_std)
 {
     int len = my_printf("%#05.10b", 5);
-    cr_assert_stdout_eq_str("b000000101");
+    cr_assert_stdout_eq_str("b0000000101");
     cr_assert_eq(len, 10);
 }
 
